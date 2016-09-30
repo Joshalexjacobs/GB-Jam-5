@@ -1,10 +1,12 @@
 -- Moon Runner by Wee Wisp Games
+-- http://weewispgames.tumblr.com/
 -- main.lua
 
 -- includes
 Gamestate = require "lib/gamestate"
 require "lib/maid64"
-require 'states/menu'
+require "lib/anim8"
+require "states/menu"
 
 -- global functions
 function copy(obj, seen)
@@ -18,11 +20,16 @@ function copy(obj, seen)
 end
 
 function love.load(arg)
-  love.window.setMode(800, 720, {resizable=true, vsync=true, minwidth=200, minheight=200}) -- set the window mode
+  love.window.setMode(480, 432, {resizable=true, vsync=true, minwidth=200, minheight=200}) -- set the window mode
 
   math.randomseed(os.time()) -- seed love.math.rand() using os time
   love.graphics.setDefaultFilter("nearest", "nearest") -- set nearest pixel distance
 
   Gamestate.registerEvents()
   Gamestate.switch(menu) -- swtich to game screen
+end
+
+function love.resize(w, h)
+    -- this is used to resize the screen correctly
+    maid64.resize(w, h)
 end

@@ -1,5 +1,5 @@
 -- menu.lua
-menu = {} -- create game gamestate
+menu = {} -- create menu gamestate
 
 require "states/game"
 
@@ -24,7 +24,10 @@ end
 function menu:draw()
   maid64.start() -- starts the maid64 process
 
-  love.graphics.printf("sup world, press space to continue", 0, 0, 100)
+  love.graphics.setColor(0, 0, 0, 255)
+  love.graphics.rectangle("fill", 0, 0, 160, 144)
+  love.graphics.setColor(255, 255, 255, 255)
+  love.graphics.printf("Hello world, press space to continue", 2, 50, 154)
 
   maid64.finish() -- finishes the maid64 process
 end
