@@ -4,6 +4,7 @@
 
 -- includes
 Gamestate = require "lib/gamestate"
+Camera = require "lib/humpCamera"
 require "lib/maid64"
 require "lib/anim8"
 require "states/menu"
@@ -19,11 +20,21 @@ function copy(obj, seen)
   return res
 end
 
+-- global vars
+camPos = 144
+
 function love.load(arg)
   love.window.setMode(480, 432, {resizable=true, vsync=true, minwidth=200, minheight=200}) -- set the window mode
+  --love.window.setMode(160, 144, {resizable=true, vsync=true, minwidth=200, minheight=200}) -- set the window mode
 
   math.randomseed(os.time()) -- seed love.math.rand() using os time
   love.graphics.setDefaultFilter("nearest", "nearest") -- set nearest pixel distance
+
+  -- load fonts
+  smallFont = love.graphics.newFont("lib/Early Gameboy.ttf", 7)
+  medFont = love.graphics.newFont("lib/Early Gameboy.ttf", 10)
+  bigFont = love.graphics.newFont("lib/Early Gameboy.ttf", 14)
+  love.graphics.setFont(smallFont)
 
   Gamestate.registerEvents()
   Gamestate.switch(menu) -- swtich to game screen
@@ -32,4 +43,5 @@ end
 function love.resize(w, h)
     -- this is used to resize the screen correctly
     maid64.resize(w, h)
+    camera = Camera(love.graphics.getWidth() / 2, love.graphics.getHeight() / 2 + camPos)
 end

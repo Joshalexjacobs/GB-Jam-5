@@ -52,6 +52,14 @@ end
 function PaletteSwitcher.setPallet(i)
    index = i
 end
+
+---
+-- Returns index of the Palette the switcher is currently displaying
+--
+function PaletteSwitcher.getPalette()
+  return lut:getHeight() - index
+end
+
 ---
 -- Initialise the palette switcher.
 -- @param ppath - The path to the look up table.

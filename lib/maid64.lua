@@ -79,3 +79,6 @@ end
 function maid64.setPallet(i)
   PaletteSwitcher.setPallet(i)
 end
+function maid64.getPaletteIndex()
+  return PaletteSwitcher.getPalette()
+end

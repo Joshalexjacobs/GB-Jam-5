@@ -27,7 +27,7 @@ function menu:draw()
   love.graphics.setColor(0, 0, 0, 255)
   love.graphics.rectangle("fill", 0, 0, 160, 144)
   love.graphics.setColor(255, 255, 255, 255)
-  love.graphics.printf("Hello world, press space to continue", 2, 50, 154)
+  love.graphics.printf("Hello world, press space to continue", 4, 40, 160)
 
   maid64.finish() -- finishes the maid64 process
 end
