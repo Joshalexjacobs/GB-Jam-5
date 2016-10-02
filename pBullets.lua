@@ -1,6 +1,7 @@
 -- pBullets.lua --- player bullets
 
 local pBullet = {
+  type = "pBullet",
   x = 0,
   y = 0,
   w = 2,
@@ -9,7 +10,9 @@ local pBullet = {
   speed = 125,
   lifeTime = 0, -- determines how long the bullet is alive for
   filter = function(item, other)
-    -- nothing yet
+    if other.type == "enemy" then
+      return 'touch'
+    end
   end,
   timers = {}
 }
@@ -43,7 +46,12 @@ function updatePBullets(dt, world)
     newPBullet.x, newPBullet.y, cols, len = world:move(newPBullet, newPBullet.x + newPBullet.dx, newPBullet.y + newPBullet.dy, newPBullet.filter)
 
     -- handle collision
-    -- collision stuff...
+    for j = 1, len do
+      if cols[j].other.type == "enemy" then
+        cols[j].other.hp = cols[j].other.hp - 1
+        removePBullet(newPBullet, i, world)
+      end
+    end
 
     if updateTimer(dt, "life", newPBullet.timers) then
       removePBullet(newPBullet, i, world)

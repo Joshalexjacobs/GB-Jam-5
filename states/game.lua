@@ -5,6 +5,7 @@ player = require "player"
 sti = require "lib/sti"
 local bump = require "lib/bump"
 
+require "enemies"
 require "pBullets"
 require "lib/timer"
 
@@ -27,6 +28,9 @@ function game:enter()
   -- intialize player
   player:load(world)
 
+  --add a test enemy
+  addEnemy(75, 175, world)
+
   -- test crater
   crater = maid64.newImage("img/craterTest.png")
 end
@@ -46,6 +50,8 @@ end
 function game:update(dt)
   player:update(dt, world) -- update player
   updatePBullets(dt, world) -- update player bullets
+
+  updateEnemy(dt, world) -- update enemies
 
   --camDY = camSpeed * dt -- current deactivated
 
@@ -68,6 +74,7 @@ function game:draw()
   love.graphics.draw(crater, 120, 150, 0, 1, 1, 0, 0)
 
   player:draw()
+  drawEnemy()
   drawPBullets()
   camera:detach()
 

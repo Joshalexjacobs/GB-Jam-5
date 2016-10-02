@@ -1,6 +1,8 @@
 -- player.lua
 
 local player = {
+  hp = 1,
+  type = "player",
   x = 75,
   y = 250,
   w = 10,
@@ -41,6 +43,8 @@ function player:update(dt, world)
   elseif love.keyboard.isDown('d') and love.keyboard.isDown('a') == false then
     player.dx = (dt * player.speed)
   end
+
+  local cols, len = 0, 0
 
   -- update player coordinates
   player.x, player.y, cols, len = world:move(player, player.x + player.dx, player.y + player.dy, player.filter)
