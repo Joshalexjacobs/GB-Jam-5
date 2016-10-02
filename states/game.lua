@@ -3,12 +3,32 @@ game = {} -- create game gamestate
 
 player = require "player"
 sti = require "lib/sti"
+local bump = require "lib/bump"
+
+require "pBullets"
+require "lib/timer"
+
+-- collision using bump
+local world = bump.newWorld()
+
+-- camera's constant vertical movement
+local camDY = 0
+local camSpeed = -25
 
 function game:enter()
-  --testTile = maid64.newImage("img/testTile.png")
+  -- initialize map
   map = sti("img/tileMap.lua", {"bump"})
+  map:bump_init(world)
+
+  -- initialize camera
   camera = Camera(love.graphics.getWidth() / 2, love.graphics.getHeight() / 2 + camPos)
   camera.smoother = Camera.smooth.damped(10)
+
+  -- intialize player
+  player:load(world)
+
+  -- test crater
+  crater = maid64.newImage("img/craterTest.png")
 end
 
 function game:keypressed(key, code)
@@ -24,12 +44,15 @@ function game:keypressed(key, code)
 end
 
 function game:update(dt)
-  player:update(dt)
+  player:update(dt, world) -- update player
+  updatePBullets(dt, world) -- update player bullets
+
+  --camDY = camSpeed * dt -- current deactivated
 
   local left, top = camera:position()
-  camPos = camPos + (-25 * dt) -- update camera position
+  camPos = camPos + camDY -- update camera position
 
-  camera:move(0, -25 * dt) -- move camera
+  camera:move(0, camDY) -- move camera
 end
 
 function game:draw()
@@ -42,9 +65,10 @@ function game:draw()
 
   map:draw()
 
-  --love.graphics.draw(testTile, 0, 0, 0, 1, 1, 0, 0)
+  love.graphics.draw(crater, 120, 150, 0, 1, 1, 0, 0)
 
   player:draw()
+  drawPBullets()
   camera:detach()
 
   --- prints the current palette that is being displayed [TAKE OUT BEFORE RELEASE]
