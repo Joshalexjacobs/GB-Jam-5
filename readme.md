@@ -5,6 +5,9 @@ The game is heavily inspired by classic NES games such as Gun Smoke and Super Co
 
 ## Controls
 WASD - Movement
+
 M - Shoot right
+
 N - Shoot left
+
 M + N - Shoot up
