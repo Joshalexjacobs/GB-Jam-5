@@ -15,8 +15,9 @@ local enemy = {
   dir = 0,
   speed = 50,
   timers = {},
+  isHit = false,
   isDead = false,
-  isActive = true,
+  isActive = false,
   behaviour = nil,
   spriteSheet = nil,
   spriteGrid = nil,
@@ -52,8 +53,13 @@ function updateEnemy(dt, world)
   for i, newEnemy in ipairs(enemies) do
     local cols, len = 0, 0
 
-    -- call enemy update function
-    newEnemy.behaviour(dt, newEnemy)
+    -- pre update active check
+    if newEnemy.isActive == false and camPos < newEnemy.y + newEnemy.h then
+        newEnemy.isActive = true -- once the enemy is on screen, activate behaviour function
+    elseif newEnemy.isActive then
+      -- call enemy update function
+      newEnemy.behaviour(dt, newEnemy)
+    end
 
     -- update anim
     newEnemy.animations[newEnemy.curAnim]:update(dt)
@@ -79,7 +85,13 @@ end
 
 function drawEnemy()
   for _, newEnemy in ipairs(enemies) do
+    if newEnemy.isHit then -- if the enemy was hit, make them flash for a tick
+      love.graphics.setColor(0, 0, 0, 255)
+      newEnemy.isHit = false
+    end
+
     --love.graphics.rectangle("fill", newEnemy.x, newEnemy.y, newEnemy.w, newEnemy.h)
     newEnemy.animations[newEnemy.curAnim]:draw(newEnemy.spriteSheet, newEnemy.x, newEnemy.y, 0, 1, 1, newEnemy.offX, newEnemy.offY)
+    love.graphics.setColor(255, 255, 255, 255)
   end
 end

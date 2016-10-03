@@ -7,11 +7,11 @@ local pBullet = {
   w = 2,
   h = 2,
   dir = 0,
-  speed = 125,
+  speed = 200,
   lifeTime = 0, -- determines how long the bullet is alive for
   isDead = false,
   filter = function(item, other)
-    if other.type == "enemy" then
+    if other.type == "enemy" or other.type == "block" then
       return 'touch'
     end
   end,
@@ -19,6 +19,11 @@ local pBullet = {
 }
 
 pBullets = {}
+
+function loadPBullet()
+  hit = love.audio.newSource("sfx/hit.wav", "static")
+  hit:setVolume(0.6)
+end
 
 function addPBullet(pX, pY, pDir, life, world)
   local newPBullet = copy(pBullet, newPBullet)
@@ -52,6 +57,11 @@ function updatePBullets(dt, world)
     for j = 1, len do
       if cols[j].other.type == "enemy" then
         cols[j].other.hp = cols[j].other.hp - 1
+        cols[j].other.isHit = true
+        hit:setPitch(love.math.random(8, 12) * 0.1)
+        hit:play()
+        removePBullet(newPBullet, i, world)
+      elseif cols[j].other.type == "block" then
         removePBullet(newPBullet, i, world)
       end
     end

@@ -21,11 +21,11 @@ function copy(obj, seen)
 end
 
 -- global vars
-camPos = 144
+--camPos = 144
+camPos = 730
 
 function love.load(arg)
-  love.window.setMode(480, 432, {resizable=true, vsync=true, minwidth=200, minheight=200}) -- set the window mode
-  --love.window.setMode(160, 144, {resizable=true, vsync=true, minwidth=200, minheight=200}) -- set the window mode
+  love.window.setMode(480, 432, {resizable=true, vsync=true, minwidth=160, minheight=144}) -- set the window mode
 
   math.randomseed(os.time()) -- seed love.math.rand() using os time
   love.graphics.setDefaultFilter("nearest", "nearest") -- set nearest pixel distance

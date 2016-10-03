@@ -17,12 +17,19 @@ local world = bump.newWorld()
 
 -- camera's constant vertical movement
 local camDY = 0
-local camSpeed = -25
+local camSpeed = -5
 
 function game:enter()
   -- initialize map
   map = sti("img/tileMap.lua", {"bump"})
   map:bump_init(world)
+
+  -- initalize collision objects
+  for _, object in ipairs(map.objects) do
+    if object.properties.collidable then
+      world:add(object, object.x, object.y, object.width, object.height)
+    end
+  end
 
   -- initialize camera
   camera = Camera(love.graphics.getWidth() / 2, love.graphics.getHeight() / 2 + camPos)
@@ -31,8 +38,23 @@ function game:enter()
   -- intialize player
   player:load(world)
 
+  -- load player bullet assets
+  loadPBullet()
+
   --add a test enemy
   addEnemy(75, 175, "moonBug", world)
+
+  addEnemy(100, 150, "centipede", world)
+  addEnemy(84, 145, "centipede", world)
+  addEnemy(68, 140, "centipede", world)
+
+  addEnemy(52, 100, "centipede", world)
+  addEnemy(36, 95, "centipede", world)
+  addEnemy(20, 90, "centipede", world)
+
+  addEnemy(75, 0, "moonBug", world)
+  addEnemy(100, 100, "moonCrab", world)
+  addEnemy(25, 100, "moonCrab", world)
 end
 
 function game:keypressed(key, code)
@@ -53,7 +75,7 @@ function game:update(dt)
 
   updateEnemy(dt, world) -- update enemies
 
-  --camDY = camSpeed * dt -- current deactivated
+  camDY = camSpeed * dt -- current deactivated
 
   local left, top = camera:position()
   camPos = camPos + camDY -- update camera position

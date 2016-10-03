@@ -4,31 +4,37 @@ local player = {
   hp = 1,
   type = "player",
   x = 75,
-  y = 250,
+  y = 825,
   w = 10,
   h = 10,
   dx = 0,
   dy = 0,
   speed = 60,
   decel = 8,
-  shootRate = 0.25,
+  shootRate = 0.15,
   bulletLife = 0.25, -- how long each bullet is alive in seconds
   isDead = false,
   lives = 3,
   filter = function(item, other)
-    -- nothing yet
+    if other.type == "block" then
+      return 'slide'
+    end
   end,
   timers = {},
 }
 
 function player:load(world)
   world:add(player, player.x, player.y, player.w, player.h)
+  pShoot = love.audio.newSource("sfx/pShoot.wav", "static")
+  pShoot:setVolume(0.5)
 end
 
 function player:shoot(angle, world)
   if checkTimer("shoot", player.timers) == false then
     addPBullet(player.x + player.w / 2, player.y, angle, player.bulletLife, world)
     addTimer(player.shootRate, "shoot", player.timers)
+    pShoot:setPitch(love.math.random(10, 11) * 0.1)
+    pShoot:play()
   end
 end
 

@@ -1,9 +1,13 @@
 -- enemyDictionary.lua
 
 local moonBug = require "enemies/moonBug"
+local moonCrab = require "enemies/moonCrab"
+local centipede = require "enemies/centipede"
 
 local enemyDictionary = {
   {name = "moonBug", enemy = moonBug},
+  {name = "moonCrab", enemy = moonCrab},
+  {name = "centipede", enemy = centipede},
 }
 
 function getEnemy(enemy)

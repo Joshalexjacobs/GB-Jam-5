@@ -1,7 +1,7 @@
 -- moonbug.lua -- an enemy
 
 local moonBug = {
-  hp = 2,
+  hp = 5,
   w = 14,
   h = 14,
   offX = 1,
@@ -9,7 +9,7 @@ local moonBug = {
   name = "moonBug",
   speed = 20,
   behaviour = function(dt, entity)
-    if entity.isActive then
+    if entity.isDead == false then
       local angle = math.atan2(entity.y - player.y, entity.x - player.x)
       entity.dx = -math.cos(angle) * dt * entity.speed
       entity.dy = -math.sin(angle) * dt * entity.speed
