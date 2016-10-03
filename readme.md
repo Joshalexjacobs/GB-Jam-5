@@ -11,3 +11,12 @@ M - Shoot right
 N - Shoot left
 
 M + N - Shoot up
+
+## Libraries Used
+- Bump by Enrique García Cota
+- Maid64 by adekto
+- Hump by Matthias Richter
+- Palette Switcher by Robert Machmer
+- Anim8 by Enrique García Cota
+- STI (Simple Tiled Implementation) by Landon Manning
+- Timer by Joshua Jacobs
