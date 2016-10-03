@@ -2,12 +2,15 @@
 game = {} -- create game gamestate
 
 player = require "player"
-sti = require "lib/sti"
-local bump = require "lib/bump"
+anim8 = require 'lib/anim8' -- our animation library
+local sti = require "lib/sti" -- simple tiled implementation
+local bump = require "lib/bump" -- our collision library
+
 
 require "enemies"
+require "enemyDictionary"
 require "pBullets"
-require "lib/timer"
+require "lib/timer" -- a simple timer library
 
 -- collision using bump
 local world = bump.newWorld()
@@ -29,10 +32,7 @@ function game:enter()
   player:load(world)
 
   --add a test enemy
-  addEnemy(75, 175, world)
-
-  -- test crater
-  crater = maid64.newImage("img/craterTest.png")
+  addEnemy(75, 175, "moonBug", world)
 end
 
 function game:keypressed(key, code)
@@ -70,8 +70,6 @@ function game:draw()
   love.graphics.setColor(255, 255, 255, 255)
 
   map:draw()
-
-  love.graphics.draw(crater, 120, 150, 0, 1, 1, 0, 0)
 
   player:draw()
   drawEnemy()

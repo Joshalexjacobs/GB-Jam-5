@@ -9,6 +9,7 @@ local pBullet = {
   dir = 0,
   speed = 125,
   lifeTime = 0, -- determines how long the bullet is alive for
+  isDead = false,
   filter = function(item, other)
     if other.type == "enemy" then
       return 'touch'
@@ -31,8 +32,8 @@ function addPBullet(pX, pY, pDir, life, world)
 end
 
 function removePBullet(entity, i, world)
-  table.remove(pBullets, i)
   world:remove(entity)
+  table.remove(pBullets, i)
 end
 
 function updatePBullets(dt, world)
@@ -43,7 +44,9 @@ function updatePBullets(dt, world)
     local cols, len = 0, 0
 
     -- move bullets
-    newPBullet.x, newPBullet.y, cols, len = world:move(newPBullet, newPBullet.x + newPBullet.dx, newPBullet.y + newPBullet.dy, newPBullet.filter)
+    if newPBullet.isDead == false then
+      newPBullet.x, newPBullet.y, cols, len = world:move(newPBullet, newPBullet.x + newPBullet.dx, newPBullet.y + newPBullet.dy, newPBullet.filter)
+    end
 
     -- handle collision
     for j = 1, len do
@@ -53,8 +56,9 @@ function updatePBullets(dt, world)
       end
     end
 
-    if updateTimer(dt, "life", newPBullet.timers) then
-      removePBullet(newPBullet, i, world)
+    if updateTimer(dt, "life", newPBullet.timers) or newPBullet.isDead == true then
+      newPBullet.isDead = true
+      if world:hasItem(newPBullet) then removePBullet(newPBullet, i, world) end
     end
   end
 end

@@ -13,6 +13,8 @@ local player = {
   decel = 8,
   shootRate = 0.25,
   bulletLife = 0.25, -- how long each bullet is alive in seconds
+  isDead = false,
+  lives = 3,
   filter = function(item, other)
     -- nothing yet
   end,
@@ -28,6 +30,14 @@ function player:shoot(angle, world)
     addPBullet(player.x + player.w / 2, player.y, angle, player.bulletLife, world)
     addTimer(player.shootRate, "shoot", player.timers)
   end
+end
+
+function player:kill()
+  print("bang, you dead")
+  -- player.isDead = true
+  -- play death anim
+  -- decrement lives
+  -- start respawn -- at end of respawn player.isDead = false
 end
 
 function player:update(dt, world)
