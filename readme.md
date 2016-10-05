@@ -20,3 +20,10 @@ M + N - Shoot up
 - Anim8 by Enrique García Cota
 - STI (Simple Tiled Implementation) by Landon Manning
 - Timer by Joshua Jacobs
+
+## Other Credits
+- Music by T McB
+
+## Tools Used
+- Sound Effects created using [BFXR](http://www.bfxr.net/)
+- Sprites and all art assets created using [Aseprite](http://www.aseprite.org/)

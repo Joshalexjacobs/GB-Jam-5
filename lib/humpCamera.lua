@@ -72,6 +72,19 @@ function camera.smooth.forwardDamped(stiffness)
 	end
 end
 
+-- damped smoothing that only moves up
+function camera.smooth.upwardDamped(stiffness)
+	assert(type(stiffness) == "number", "Invalid parameter: stiffness = "..tostring(stiffness))
+	return function(dx,dy, s)
+		local dts = love.timer.getDelta() * (s or stiffness)
+		if dy > 0 then
+			return dy, 0
+		else
+			return dx*dts, dy*dts
+		end
+	end
+end
+
 local function new(x,y, zoom, rot, smoother)
 	x,y  = x or love.graphics.getWidth()/2, y or love.graphics.getHeight()/2
 	zoom = zoom or 1

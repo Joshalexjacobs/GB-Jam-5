@@ -8,7 +8,7 @@ local centipede = {
   offY = 1,
   name = "centipede",
   speed = 10,
-  behaviour = function(dt, entity)
+  behaviour = function(dt, entity, world)
     if entity.isDead == false then
       entity.dy = 0.15 * math.sin(love.timer.getTime() * 0.5 * math.pi)
 

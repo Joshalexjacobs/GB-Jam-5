@@ -8,7 +8,7 @@ local moonCrab = {
   offY = 1,
   name = "moonCrab",
   speed = 40,
-  behaviour = function(dt, entity)
+  behaviour = function(dt, entity, world)
     if entity.isDead == false then
       local angle = math.atan2(entity.y - player.y, entity.x - player.x)
       entity.dx = -math.cos(angle) * dt * entity.speed

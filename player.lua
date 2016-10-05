@@ -4,19 +4,19 @@ local player = {
   hp = 1,
   type = "player",
   x = 75,
-  y = 825,
+  y = 950, -- 950
   w = 10,
   h = 10,
   dx = 0,
   dy = 0,
-  speed = 60,
+  speed = 40,
   decel = 8,
   shootRate = 0.15,
   bulletLife = 0.25, -- how long each bullet is alive in seconds
   isDead = false,
   lives = 3,
   filter = function(item, other)
-    if other.type == "block" then
+    if other.type == "block" or other.name == "doubleDoor" then
       return 'slide'
     end
   end,

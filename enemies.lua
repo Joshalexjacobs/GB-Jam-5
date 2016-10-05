@@ -28,6 +28,13 @@ local enemy = {
       return 'slide'
     end
   end,
+  collision = function(cols, len)
+    for j = 1, len do
+      if cols[j].other.type == "player" then
+        cols[j].other:kill()
+      end
+    end
+  end
 }
 
 enemies = {}
@@ -55,10 +62,11 @@ function updateEnemy(dt, world)
 
     -- pre update active check
     if newEnemy.isActive == false and camPos < newEnemy.y + newEnemy.h then
+      print(newEnemy.name .. "is on it")
         newEnemy.isActive = true -- once the enemy is on screen, activate behaviour function
     elseif newEnemy.isActive then
       -- call enemy update function
-      newEnemy.behaviour(dt, newEnemy)
+      newEnemy.behaviour(dt, newEnemy, world)
     end
 
     -- update anim
@@ -70,10 +78,11 @@ function updateEnemy(dt, world)
     end
 
     -- handle collision
-    for j = 1, len do
-      if cols[j].other.type == "player" then
-        cols[j].other:kill()
-      end
+    newEnemy.collision(cols, len)
+
+    -- if enemies fall below screen
+    if newEnemy.y > camPos + 160 then
+      newEnemy.isDead = true
     end
 
     if newEnemy.hp <= 0 or newEnemy.isDead then

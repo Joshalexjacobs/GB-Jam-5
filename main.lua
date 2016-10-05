@@ -22,7 +22,8 @@ end
 
 -- global vars
 --camPos = 144
-camPos = 730
+--camPos = 730
+camPos = 946
 
 function love.load(arg)
   love.window.setMode(480, 432, {resizable=true, vsync=true, minwidth=160, minheight=144}) -- set the window mode
@@ -43,5 +44,6 @@ end
 function love.resize(w, h)
     -- this is used to resize the screen correctly
     maid64.resize(w, h)
-    camera = Camera(love.graphics.getWidth() / 2, love.graphics.getHeight() / 2 + camPos)
+    camera = Camera(love.graphics.getWidth() / 2, love.graphics.getHeight() / 2 + player.y - 80)
+    camera.smoother = Camera.smooth.upwardDamped(1)
 end

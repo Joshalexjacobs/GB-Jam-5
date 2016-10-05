@@ -3,11 +3,17 @@
 local moonBug = require "enemies/moonBug"
 local moonCrab = require "enemies/moonCrab"
 local centipede = require "enemies/centipede"
+local moonTurret = require "enemies/moonTurret"
+local moonTurretPlus = require "enemies/moonTurretPlus"
+local doubleDoor = require "enemies/doubleDoor"
 
 local enemyDictionary = {
   {name = "moonBug", enemy = moonBug},
   {name = "moonCrab", enemy = moonCrab},
   {name = "centipede", enemy = centipede},
+  {name = "moonTurret", enemy = moonTurret},
+  {name = "moonTurretPlus", enemy = moonTurretPlus},
+  {name = "doubleDoor", enemy = doubleDoor},
 }
 
 function getEnemy(enemy)
@@ -20,6 +26,14 @@ function getEnemy(enemy)
       enemy.spriteSheet = maid64.newImage(enemyDictionary[i].enemy.spriteSheet)
       enemy.spriteGrid = anim8.newGrid(enemyDictionary[i].enemy.spriteGrid.x, enemyDictionary[i].enemy.spriteGrid.y, enemyDictionary[i].enemy.spriteGrid.w, enemyDictionary[i].enemy.spriteGrid.h, 0, 0, 0)
       enemy.animations = enemyDictionary[i].enemy.animations(enemy.spriteGrid)
+
+      if enemyDictionary[i].enemy.filter ~= nil then
+        enemy.filter = enemyDictionary[i].enemy.filter
+      end
+
+      if enemyDictionary[i].enemy.collsion ~= nil then
+        enemy.collsion = enemyDictionary[i].enemy.collsion
+      end
     end
   end
 end

@@ -7,17 +7,14 @@ local sti = require "lib/sti" -- simple tiled implementation
 local bump = require "lib/bump" -- our collision library
 
 
+require "pBullets"
+require "eBullets"
 require "enemies"
 require "enemyDictionary"
-require "pBullets"
 require "lib/timer" -- a simple timer library
 
 -- collision using bump
 local world = bump.newWorld()
-
--- camera's constant vertical movement
-local camDY = 0
-local camSpeed = -5
 
 function game:enter()
   -- initialize map
@@ -32,16 +29,18 @@ function game:enter()
   end
 
   -- initialize camera
-  camera = Camera(love.graphics.getWidth() / 2, love.graphics.getHeight() / 2 + camPos)
-  camera.smoother = Camera.smooth.damped(10)
+  camera = Camera(love.graphics.getWidth() / 2, love.graphics.getHeight() / 2 + player.y - 80)
+  camera.smoother = Camera.smooth.upwardDamped(1)
 
   -- intialize player
   player:load(world)
 
-  -- load player bullet assets
+  -- load player and enemy bullet assets
   loadPBullet()
+  loadEBullet()
 
   --add a test enemy
+  --addEnemy(65, 209, "doubleDoor", world)
   addEnemy(75, 175, "moonBug", world)
 
   addEnemy(100, 150, "centipede", world)
@@ -74,13 +73,13 @@ function game:update(dt)
   updatePBullets(dt, world) -- update player bullets
 
   updateEnemy(dt, world) -- update enemies
-
-  camDY = camSpeed * dt -- current deactivated
+  updateEBullets(dt, world) -- update enemy bullets
 
   local left, top = camera:position()
-  camPos = camPos + camDY -- update camera position
 
-  camera:move(0, camDY) -- move camera
+  camPos = top - love.graphics.getHeight() / 2 -- 216 may change as the tilemap changes
+
+  camera:lockY(player.y - 80 + love.graphics.getHeight() / 2)
 end
 
 function game:draw()
@@ -94,12 +93,16 @@ function game:draw()
   map:draw()
 
   player:draw()
-  drawEnemy()
   drawPBullets()
+
+  drawEnemy()
+  drawEBullets()
+
   camera:detach()
 
   --- prints the current palette that is being displayed [TAKE OUT BEFORE RELEASE]
   love.graphics.printf(tostring(maid64.getPaletteIndex()), 145, 0, 20)
 
   maid64.finish() -- finishes the maid64 process
+  --love.graphics.rectangle("fill", 0, 0, 160, 1)
 end
