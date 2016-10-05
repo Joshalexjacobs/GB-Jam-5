@@ -6,6 +6,8 @@ local centipede = require "enemies/centipede"
 local moonTurret = require "enemies/moonTurret"
 local moonTurretPlus = require "enemies/moonTurretPlus"
 local doubleDoor = require "enemies/doubleDoor"
+local astroHead = require "enemies/astroHead"
+local mine = require "enemies/mine"
 
 local enemyDictionary = {
   {name = "moonBug", enemy = moonBug},
@@ -14,6 +16,8 @@ local enemyDictionary = {
   {name = "moonTurret", enemy = moonTurret},
   {name = "moonTurretPlus", enemy = moonTurretPlus},
   {name = "doubleDoor", enemy = doubleDoor},
+  {name = "astroHead", enemy = astroHead},
+  {name = "mine", enemy = mine},
 }
 
 function getEnemy(enemy)
@@ -33,6 +37,10 @@ function getEnemy(enemy)
 
       if enemyDictionary[i].enemy.collsion ~= nil then
         enemy.collsion = enemyDictionary[i].enemy.collsion
+      end
+
+      if enemyDictionary[i].enemy.type ~= nil then
+        enemy.type = enemyDictionary[i].enemy.type
       end
     end
   end

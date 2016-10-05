@@ -41,6 +41,7 @@ function game:enter()
 
   --add a test enemy
   --addEnemy(65, 209, "doubleDoor", world)
+  addEnemy(75, player.y - 40, "mine", world)
   addEnemy(75, 175, "moonBug", world)
 
   addEnemy(100, 150, "centipede", world)
@@ -92,11 +93,11 @@ function game:draw()
 
   map:draw()
 
-  player:draw()
-  drawPBullets()
-
   drawEnemy()
   drawEBullets()
+
+  player:draw()
+  drawPBullets()
 
   camera:detach()
 

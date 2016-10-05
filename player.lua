@@ -18,6 +18,8 @@ local player = {
   filter = function(item, other)
     if other.type == "block" or other.name == "doubleDoor" then
       return 'slide'
+    elseif other.type == "mine" then
+      return 'cross'
     end
   end,
   timers = {},
@@ -39,7 +41,7 @@ function player:shoot(angle, world)
 end
 
 function player:kill()
-  print("bang, you dead")
+  --print("bang, you dead")
   -- player.isDead = true
   -- play death anim
   -- decrement lives
@@ -66,7 +68,11 @@ function player:update(dt, world)
   player.x, player.y, cols, len = world:move(player, player.x + player.dx, player.y + player.dy, player.filter)
 
   -- and check for collision
-  -- stuff... here...
+  for j = 1, len do
+    if cols[j].other.type == "mine" then
+      cols[j].other.curAnim = 2
+    end
+  end
 
   -- deceleration
   if love.keyboard.isDown("d") == false and player.dx > 0 then -- moving right
