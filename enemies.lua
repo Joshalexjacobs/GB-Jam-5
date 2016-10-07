@@ -56,6 +56,14 @@ function removeEnemy(entity, i, world)
   table.remove(enemies, i)
 end
 
+function removeAllEnemies(world)
+  for i, newEnemy in ipairs(enemies) do
+    world:remove(newEnemy)
+  end
+
+  enemies = {}
+end
+
 function updateEnemy(dt, world)
   for i, newEnemy in ipairs(enemies) do
     local cols, len = 0, 0
@@ -78,7 +86,9 @@ function updateEnemy(dt, world)
     end
 
     -- handle collision
-    newEnemy.collision(cols, len)
+    --if newEnemy.type == "enemy" then
+      newEnemy.collision(cols, len)
+    --end
 
     -- if enemies fall below screen
     if newEnemy.y + newEnemy.h > camPos + 160 then

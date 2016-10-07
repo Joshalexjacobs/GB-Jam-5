@@ -62,7 +62,7 @@ function updateEBullets(dt, world)
     -- handle collision
     for j = 1, len do
       if cols[j].other.type == "player" then
-        -- kill player?
+        cols[j].other:kill()
         hit:setPitch(love.math.random(8, 12) * 0.1)
         hit:play()
         removeEBullet(newEBullet, i, world)

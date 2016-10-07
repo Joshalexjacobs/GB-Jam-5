@@ -1,10 +1,11 @@
 -- player.lua
 
 local player = {
-  hp = 1,
+  hp = 3,
   type = "player",
+  checkPoint = 1930, -- starts at 2680
   x = 75,
-  y = 1930, -- 2680 == checkpoint 1
+  y = 1930, -- 2680 == checkpoint 1 -- 1930 == 2
   w = 10,
   h = 10,
   dx = 0,
@@ -14,6 +15,7 @@ local player = {
   shootRate = 0.15,
   bulletLife = 0.25, -- how long each bullet is alive in seconds
   isDead = false,
+  isHit = false,
   lives = 3,
   filter = function(item, other)
     if other.type == "block" or other.name == "doubleDoor" then
@@ -41,69 +43,124 @@ function player:shoot(angle, world)
 end
 
 function player:kill()
-  --print("bang, you dead")
-  -- player.isDead = true
-  -- play death anim
-  -- decrement lives
-  -- start respawn -- at end of respawn player.isDead = false
+  if checkTimer("invincible", player.timers) == false then
+    player.hp = player.hp - 1
+    player.dy = player.dy + 3
+    addTimer(1.0, "invincible", player.timers)
+    addTimer(0.4, "hit", player.timers)
+    player.isHit = true
+    if player.hp <= 0 then
+      player.isDead = true
+      player.type = "dead"
+    end
+  end
+end
+
+function player:respawn(world)
+  removeAllEnemies(world)
+  player.hp = 3
+  player.isDead = false
+  player.type = "player"
+  player.x = 75
+  player.y = player.checkPoint
+  loadCheckPoint(world)
 end
 
 function player:update(dt, world)
-  -- 8 way movement
-  if love.keyboard.isDown('w') and love.keyboard.isDown('s') == false then
-    player.dy = -(dt * player.speed)
-  elseif love.keyboard.isDown('s') and love.keyboard.isDown('w') == false then
-    player.dy = (dt * player.speed)
-  end
+  if player.isDead == false then
 
-  if love.keyboard.isDown('a') and love.keyboard.isDown('d') == false then
-    player.dx = -(dt * player.speed)
-  elseif love.keyboard.isDown('d') and love.keyboard.isDown('a') == false then
-    player.dx = (dt * player.speed)
-  end
+    if player.isHit == false and checkTimer("hit", player.timers) == false then
+      -- 8 way movement
+      if love.keyboard.isDown('w') and love.keyboard.isDown('s') == false then
+        player.dy = -(dt * player.speed)
+      elseif love.keyboard.isDown('s') and love.keyboard.isDown('w') == false then
+        player.dy = (dt * player.speed)
+      end
 
-  local cols, len = 0, 0
+      if love.keyboard.isDown('a') and love.keyboard.isDown('d') == false then
+        player.dx = -(dt * player.speed)
+      elseif love.keyboard.isDown('d') and love.keyboard.isDown('a') == false then
+        player.dx = (dt * player.speed)
+      end
+    end
 
-  -- update player coordinates
-  player.x, player.y, cols, len = world:move(player, player.x + player.dx, player.y + player.dy, player.filter)
+    local cols, len = 0, 0
 
-  -- and check for collision
-  for j = 1, len do
-    if cols[j].other.type == "mine" then
-      cols[j].other.curAnim = 2
+    -- update player coordinates
+    player.x, player.y, cols, len = world:move(player, player.x + player.dx, player.y + player.dy, player.filter)
+
+    -- and check for collision
+    for j = 1, len do
+      if cols[j].other.type == "mine" then
+        cols[j].other.curAnim = 2
+        cols[j].other.type = "timebomb"
+      end
+    end
+
+    -- deceleration
+    if love.keyboard.isDown("d") == false and player.dx > 0 then -- moving right
+      player.dx = math.max((player.dx - player.decel * dt), 0)
+    elseif love.keyboard.isDown("a") == false and player.dx < 0 then -- moving left
+      player.dx = math.min((player.dx + player.decel * dt), 0)
+    end
+
+    if love.keyboard.isDown("s") == false and player.dy > 0 then -- moving down
+      player.dy = math.max((player.dy - player.decel * dt), 0)
+    elseif love.keyboard.isDown("w") == false and player.dy < 0 then -- moving up
+      player.dy = math.min((player.dy + player.decel * dt), 0)
+    end
+
+    if love.keyboard.isDown("m") and love.keyboard.isDown("n") then
+      player:shoot(-math.pi/2, world)
+    elseif love.keyboard.isDown("m") then
+      player:shoot(7*math.pi/4, world)
+    elseif love.keyboard.isDown("n") then
+      player:shoot(5*math.pi/4, world)
+    end
+
+    if updateTimer(dt, "shoot", player.timers) then
+      deleteTimer("shoot", player.timers)
+    end
+
+    if updateTimer(dt, "invincible", player.timers) then
+      deleteTimer("invincible", player.timers)
+    end
+
+    if updateTimer(dt, "hit", player.timers) then
+      deleteTimer("hit", player.timers)
     end
   end
-
-  -- deceleration
-  if love.keyboard.isDown("d") == false and player.dx > 0 then -- moving right
-    player.dx = math.max((player.dx - player.decel * dt), 0)
-  elseif love.keyboard.isDown("a") == false and player.dx < 0 then -- moving left
-    player.dx = math.min((player.dx + player.decel * dt), 0)
-  end
-
-  if love.keyboard.isDown("s") == false and player.dy > 0 then -- moving down
-    player.dy = math.max((player.dy - player.decel * dt), 0)
-  elseif love.keyboard.isDown("w") == false and player.dy < 0 then -- moving up
-    player.dy = math.min((player.dy + player.decel * dt), 0)
-  end
-
-  if love.keyboard.isDown("m") and love.keyboard.isDown("n") then
-    player:shoot(-math.pi/2, world)
-  elseif love.keyboard.isDown("m") then
-    player:shoot(7*math.pi/4, world)
-  elseif love.keyboard.isDown("n") then
-    player:shoot(5*math.pi/4, world)
-  end
-
-  if updateTimer(dt, "shoot", player.timers) then
-    deleteTimer("shoot", player.timers)
-  end
-
 end
 
 function player:draw()
-  love.graphics.rectangle("fill", player.x, player.y, player.w, player.h)
+  if player.isDead == false then
+    if player.isHit then -- if the enemy was hit, make them flash for a tick
+      love.graphics.setColor(0, 0, 0, 255)
+      player.isHit = false
+    end
+
+    love.graphics.rectangle("fill", player.x, player.y, player.w, player.h)
+  end
 end
 
+function player:drawHealth()
+  love.graphics.setColor(255, 255, 255, 255)
+
+  -- in order to print the letters "HP" to the screen without including a new font that's legible
+  -- at a very small size, i'm drawing the pixels for each letter individual letter.
+  -- not the cleanest method, but it's better than nothing
+  local p = 5 -- p was created to adjust the x position of HP easily
+  love.graphics.points(p, 1, p, 2, p, 3, p+1, 2, p+2, 1, p+2, 2, p+2, 3) -- H
+  love.graphics.points(p+4, 1, p+4, 2, p+4, 3, p+5, 1, p+5, 2) -- P
+
+  love.graphics.rectangle("fill", 5, 4, 24, 3) -- print a background to the health bar
+  love.graphics.setColor(150, 150, 150, 255)
+
+  for i = 1, player.hp do -- print a health bar for each hit point the player has
+    love.graphics.rectangle("fill", 6 * i + i, 5, 6, 1)
+  end
+
+  love.graphics.setColor(255, 255, 255, 255) -- reset color
+end
 
 return player

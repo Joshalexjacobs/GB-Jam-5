@@ -5,8 +5,6 @@ local checkPoint = 2
 function loadOutsideMoon(world)
   addEnemy(65, 1938, "doubleDoor", world)
 
-  -- 1945
-
   addEnemy(102, 2095, "moonTurret", world)
   addEnemy(50, 2100, "moonTurret", world)
 
@@ -57,6 +55,21 @@ function loadOutsideMoon(world)
 end
 
 function loadMoonBase(world)
+  addEnemy(90, 1380, "astroHead", world)
+  addEnemy(110, 1380, "astroHead", world)
+
+  addEnemy(100, 1450, "moonTurretPlus", world)
+
+  addEnemy(25, 1515, "mine", world)
+  addEnemy(64, 1515, "mine", world)
+  addEnemy(99, 1515, "mine", world)
+
+  addEnemy(15, 1555, "mine", world)
+  addEnemy(54, 1555, "mine", world)
+  addEnemy(89, 1555, "mine", world)
+
+  addEnemy(50, 1535, "astroHead", world) -- for draw order
+
   addEnemy(40, 1600, "moonTurret", world)
   addEnemy(60, 1605, "moonTurret", world)
   addEnemy(80, 1600, "moonTurret", world)
@@ -68,7 +81,7 @@ function loadMoonBase(world)
 
   addEnemy(20, 1780, "moonTurretPlus", world)
   addEnemy(70, 1760, "moonBug", world)
-  addEnemy(140, 1780, "moonTurretPlus", world)
+  addEnemy(130, 1780, "moonTurretPlus", world)
 
   addEnemy(40, 1830, "moonTurretPlus", world)
   addEnemy(70, 1810, "moonBug", world)
@@ -100,6 +113,7 @@ function updateCheckPoint(world)
   if checkPoint == 1 then
     if player.y < 1930 then
       checkPoint = 2
+      player.checkPoint = 1930
       loadMoonBase(world)
     end
   end

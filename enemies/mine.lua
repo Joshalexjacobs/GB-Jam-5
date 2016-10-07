@@ -20,6 +20,13 @@ local mine = {
         addTimer(0.3, "explode", entity.timers)
         entity.curAnim = 3
         entity.type = "enemy"
+        entity.collision = function(cols, len)
+          for j = 1, len do
+            if cols[j].other.type == "player" then
+              cols[j].other:kill()
+            end
+          end
+        end
       end
 
       if updateTimer(dt, "explode", entity.timers) and checkTimer("die", entity.timers) == false then
@@ -48,7 +55,12 @@ local mine = {
     end
   end,
   collision = function(cols, len)
-  end,
+    for j = 1, len do
+      if cols[j].other.type == "player" then
+        -- do nothing
+      end
+    end
+  end
 }
 
 return mine

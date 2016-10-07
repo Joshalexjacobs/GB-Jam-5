@@ -56,7 +56,7 @@ function updatePBullets(dt, world)
     -- handle collision
     for j = 1, len do
       if cols[j].other.type == "enemy" then
-        cols[j].other.hp = cols[j].other.hp - 1
+        cols[j].other.hp = cols[j].other.hp - 10 -- switch back to 1 later
         cols[j].other.isHit = true
         hit:setPitch(love.math.random(8, 12) * 0.1)
         hit:play()

@@ -39,8 +39,8 @@ function getEnemy(enemy)
         enemy.filter = enemyDictionary[i].enemy.filter
       end
 
-      if enemyDictionary[i].enemy.collsion ~= nil then
-        enemy.collsion = enemyDictionary[i].enemy.collsion
+      if enemyDictionary[i].enemy.collision ~= nil then
+        enemy.collision = enemyDictionary[i].enemy.collision
       end
 
       if enemyDictionary[i].enemy.type ~= nil then

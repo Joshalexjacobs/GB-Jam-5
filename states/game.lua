@@ -71,8 +71,13 @@ function game:update(dt)
   local left, top = camera:position()
 
   camPos = top - love.graphics.getHeight() / 2 -- 216 may change as the tilemap changes
-
-  camera:lockY(player.y - 90 + love.graphics.getHeight() / 2) -- - 80 + love...
+  if player.isDead == false then
+    camera:lockY(player.y - 90 + love.graphics.getHeight() / 2) -- - 80 + love...
+  elseif camPos < player.checkPoint - 50 then
+    camera:move(0, 2)
+  else
+    player:respawn(world)
+  end
 end
 
 function game:draw()
@@ -95,7 +100,7 @@ function game:draw()
 
   --- prints the current palette that is being displayed [TAKE OUT BEFORE RELEASE]
   love.graphics.printf(tostring(maid64.getPaletteIndex()), 145, 0, 20)
-
+  player:drawHealth()
   maid64.finish() -- finishes the maid64 process
   --love.graphics.rectangle("fill", 0, 0, 160, 1)
 end

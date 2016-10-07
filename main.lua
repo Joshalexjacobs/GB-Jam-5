@@ -32,6 +32,7 @@ function love.load(arg)
   love.graphics.setDefaultFilter("nearest", "nearest") -- set nearest pixel distance
 
   -- load fonts
+  smallestFont = love.graphics.newFont("lib/Early Gameboy.ttf", 4)
   smallFont = love.graphics.newFont("lib/Early Gameboy.ttf", 7)
   medFont = love.graphics.newFont("lib/Early Gameboy.ttf", 10)
   bigFont = love.graphics.newFont("lib/Early Gameboy.ttf", 14)
