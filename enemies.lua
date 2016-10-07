@@ -24,7 +24,7 @@ local enemy = {
   animations = nil,
   curAnim = 1,
   filter = function(item, other)
-    if other.type == "player" then
+    if other.type == "player" or other.type == "block" then
       return 'slide'
     end
   end,
@@ -81,8 +81,8 @@ function updateEnemy(dt, world)
     newEnemy.collision(cols, len)
 
     -- if enemies fall below screen
-    if newEnemy.y > camPos + 160 then
-      newEnemy.isDead = true
+    if newEnemy.y + newEnemy.h > camPos + 160 then
+      newEnemy.isActive = nil -- make them inactive
     end
 
     if newEnemy.hp <= 0 or newEnemy.isDead then

@@ -6,12 +6,12 @@ anim8 = require 'lib/anim8' -- our animation library
 local sti = require "lib/sti" -- simple tiled implementation
 local bump = require "lib/bump" -- our collision library
 
-
 require "pBullets"
 require "eBullets"
 require "enemies"
 require "enemyDictionary"
 require "lib/timer" -- a simple timer library
+require "checkPoint"
 
 -- collision using bump
 local world = bump.newWorld()
@@ -32,6 +32,10 @@ function game:enter()
   camera = Camera(love.graphics.getWidth() / 2, love.graphics.getHeight() / 2 + player.y - 80)
   camera.smoother = Camera.smooth.upwardDamped(1)
 
+  -- update camPos once
+  local left, top = camera:position()
+  camPos = top - love.graphics.getHeight() / 2 -- 216 may change as the tilemap changes
+
   -- intialize player
   player:load(world)
 
@@ -39,22 +43,8 @@ function game:enter()
   loadPBullet()
   loadEBullet()
 
-  --add a test enemy
-  --addEnemy(65, 209, "doubleDoor", world)
-  addEnemy(75, player.y - 40, "mine", world)
-  addEnemy(75, 175, "moonBug", world)
-
-  addEnemy(100, 150, "centipede", world)
-  addEnemy(84, 145, "centipede", world)
-  addEnemy(68, 140, "centipede", world)
-
-  addEnemy(52, 100, "centipede", world)
-  addEnemy(36, 95, "centipede", world)
-  addEnemy(20, 90, "centipede", world)
-
-  addEnemy(75, 0, "moonBug", world)
-  addEnemy(100, 100, "moonCrab", world)
-  addEnemy(25, 100, "moonCrab", world)
+  -- load each section of map with enemies/objects
+  loadCheckPoint(world)
 end
 
 function game:keypressed(key, code)
@@ -73,6 +63,8 @@ function game:update(dt)
   player:update(dt, world) -- update player
   updatePBullets(dt, world) -- update player bullets
 
+  updateCheckPoint(world) -- update the player's current checkpoint
+
   updateEnemy(dt, world) -- update enemies
   updateEBullets(dt, world) -- update enemy bullets
 
@@ -80,7 +72,7 @@ function game:update(dt)
 
   camPos = top - love.graphics.getHeight() / 2 -- 216 may change as the tilemap changes
 
-  camera:lockY(player.y - 80 + love.graphics.getHeight() / 2)
+  camera:lockY(player.y - 90 + love.graphics.getHeight() / 2) -- - 80 + love...
 end
 
 function game:draw()

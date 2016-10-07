@@ -19,7 +19,7 @@ local moonCrab = {
   spriteGrid = {x = 16, y = 16, w = 48, h = 16},
   animations = function(grid)
     animations = {
-      anim8.newAnimation(grid("1-2", 1, 1, 1, 3, 1), 0.25), -- 1 running
+      anim8.newAnimation(grid("1-2", 1, 1, 1, 3, 1), 0.1), -- 1 running
     }
     return animations
   end,

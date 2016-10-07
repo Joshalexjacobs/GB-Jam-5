@@ -4,7 +4,7 @@ local player = {
   hp = 1,
   type = "player",
   x = 75,
-  y = 950, -- 950
+  y = 1930, -- 2680 == checkpoint 1
   w = 10,
   h = 10,
   dx = 0,
