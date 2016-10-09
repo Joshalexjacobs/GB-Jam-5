@@ -1,7 +1,7 @@
 -- moonbug.lua -- an enemy
 
 local moonBug = {
-  hp = 5,
+  hp = 3,
   w = 14,
   h = 14,
   offX = 1,

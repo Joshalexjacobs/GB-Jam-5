@@ -1,6 +1,6 @@
 -- checkPoint.lua
 
-local checkPoint = 4
+local checkPoint = 1
 
 function loadOutsideMoon(world)
   addEnemy(65, 1938, "doubleDoor", world)

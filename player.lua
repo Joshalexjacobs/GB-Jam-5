@@ -3,9 +3,9 @@
 local player = {
   hp = 3,
   type = "player",
-  checkPoint = 160, -- starts at 2680
+  checkPoint = 2680, -- starts at 2680
   x = 75,
-  y = 160, -- 2680 == checkpoint 1 -- 1930 == 2 -- 900 == checkpoint 3
+  y = 2680, -- 2680 == checkpoint 1 -- 1930 == 2 -- 900 == checkpoint 3
   w = 10,
   h = 10,
   dx = 0,
@@ -56,7 +56,7 @@ end
 function player:kill()
   if checkTimer("invincible", player.timers) == false then
     player.hp = player.hp - 1
-    player.dy = player.dy + 2
+    player.dy = 2.5
     addTimer(1.0, "invincible", player.timers)
     addTimer(0.4, "hit", player.timers)
     player.isHit = true
@@ -74,6 +74,7 @@ function player:respawn(world)
   player.type = "player"
   player.x = 75
   player.y = player.checkPoint
+  world:move(player, player.x, player.y)
   loadCheckPoint(world)
 end
 

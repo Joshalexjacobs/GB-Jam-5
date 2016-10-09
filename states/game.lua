@@ -101,7 +101,7 @@ function game:draw()
   camera:detach()
 
   --- prints the current palette that is being displayed [TAKE OUT BEFORE RELEASE]
-  love.graphics.printf(tostring(maid64.getPaletteIndex()), 145, 0, 20)
+  --love.graphics.printf(tostring(maid64.getPaletteIndex()), 145, 0, 20)
   player:drawHealth()
   maid64.finish() -- finishes the maid64 process
   --love.graphics.rectangle("fill", 0, 0, 160, 1)

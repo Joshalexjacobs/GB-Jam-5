@@ -44,7 +44,7 @@ local lich = {
       end
 
       if checkTimer("astros", entity.timers) == false then
-        addTimer(25.0, "astros", entity.timers)
+        addTimer(20.0, "astros", entity.timers)
       end
 
       if updateTimer(dt, "astros", entity.timers) then
