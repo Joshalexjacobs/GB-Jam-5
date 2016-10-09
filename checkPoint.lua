@@ -1,6 +1,6 @@
 -- checkPoint.lua
 
-local checkPoint = 2
+local checkPoint = 4
 
 function loadOutsideMoon(world)
   addEnemy(65, 1938, "doubleDoor", world)
@@ -55,6 +55,23 @@ function loadOutsideMoon(world)
 end
 
 function loadMoonBase(world)
+  addEnemy(70, 980, "astroHead", world)
+
+  addEnemy(125, 1100, "mine", world)
+  addEnemy(105, 1130, "mine", world)
+  addEnemy(105, 1150, "mine", world)
+  addEnemy(105, 1170, "mine", world)
+
+  addEnemy(90, 1100, "astroHead", world) -- comes before mines so it draws on top
+
+  addEnemy(113, 1218, "doubleDoor", world)
+
+  addEnemy(140, 1250, "moonBug", world)
+  addEnemy(120, 1280, "moonBug", world)
+  addEnemy(90, 1280, "moonBug", world)
+  addEnemy(60, 1280, "moonBug", world)
+  addEnemy(40, 1300, "moonBug", world)
+
   addEnemy(90, 1380, "astroHead", world)
   addEnemy(110, 1380, "astroHead", world)
 
@@ -89,11 +106,61 @@ function loadMoonBase(world)
 end
 
 function loadMoonRuins(world)
+  addEnemy(98, 185, "mushroomMan", world)
+  addEnemy(30, 190, "mushroomMan", world)
+  addEnemy(82, 210, "mushroomMan", world)
+  addEnemy(122, 220, "mushroomChild", world)
+  addEnemy(130, 235, "mushroomMan", world)
+  addEnemy(99, 240, "mushroomChild", world)
+  addEnemy(22, 259, "mushroomMan", world)
 
+  addEnemy(98, 271, "mushroomMan", world)
+  addEnemy(28, 274, "mushroomChild", world)
+  addEnemy(56, 282, "mushroomMan", world)
+  addEnemy(103, 285, "mushroomChild", world)
+  addEnemy(22, 298, "mushroomMan", world)
+  addEnemy(40, 299, "mushroomChild", world)
+  addEnemy(122, 310, "mushroomMan", world)
+  addEnemy(85, 318, "mushroomChild", world)
+  addEnemy(75, 320, "mushroomMan", world)
+
+  addEnemy(122, 340, "mushroomChild", world)
+  addEnemy(110, 348, "mushroomChild", world)
+  addEnemy(23, 350, "mushroomChild", world)
+  addEnemy(45, 355, "mushroomChild", world)
+  addEnemy(72, 364, "mushroomChild", world)
+  addEnemy(74, 368, "mushroomChild", world)
+  addEnemy(132, 369, "mushroomMan", world)
+  addEnemy(76, 370, "mushroomChild", world)
+  addEnemy(113, 371, "mushroomChild", world)
+  addEnemy(100, 378, "mushroomChild", world)
+  addEnemy(120, 385, "mushroomChild", world)
+  addEnemy(19, 393, "mushroomChild", world)
+  addEnemy(96, 400, "mushroomChild", world)
+  addEnemy(25, 403, "mushroomMan", world)
+  addEnemy(46, 409, "mushroomChild", world)
+  addEnemy(23, 419, "mushroomChild", world)
+  addEnemy(133, 428, "mushroomChild", world)
+  addEnemy(52, 437, "mushroomChild", world)
+  addEnemy(15, 450, "mushroomChild", world)
+  addEnemy(120, 455, "mushroomChild", world)
+  addEnemy(60, 475, "mushroomChild", world)
+  addEnemy(75, 486, "mushroomMan", world)
+  addEnemy(50, 490, "mushroomChild", world)
+  addEnemy(20, 500, "mushroomChild", world)
+
+  addEnemy(130, 600, "mushroomChild", world)
+  addEnemy(34, 605, "mushroomChild", world)
+  addEnemy(80, 635, "mushroomChild", world)
+  addEnemy(120, 665, "mushroomChild", world)
+  addEnemy(45, 689, "mushroomChild", world)
+  addEnemy(80, 705, "mushroomChild", world)
+
+  addEnemy(70, 800, "mushroomMan", world) -- FIRST ENEMY
 end
 
 function loadLich(world)
-
+  addEnemy(0, 10, "lich", world)
 end
 
 function loadCheckPoint(world)
@@ -102,9 +169,9 @@ function loadCheckPoint(world)
   elseif checkPoint == 2 then
     loadMoonBase(world)
   elseif checkPoint == 3 then
-    -- moon ruins
+    loadMoonRuins(world)
   else
-    -- final boss
+    loadLich(world)
   end
 end
 
@@ -115,6 +182,18 @@ function updateCheckPoint(world)
       checkPoint = 2
       player.checkPoint = 1930
       loadMoonBase(world)
+    end
+  elseif checkPoint == 2 then
+    if player.y < 900 then
+      checkPoint = 3
+      player.checkPoint = 900
+      loadMoonRuins(world)
+    end
+  elseif checkPoint == 3 then
+    if player.y <= 160 then
+      checkPoint = 4
+      player.checkPoint = 160
+      loadLich(world)
     end
   end
 end

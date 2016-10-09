@@ -16,9 +16,9 @@ local moonTurretPlus = {
 
       if checkTimer("shoot", entity.timers) and updateTimer(dt, "shoot", entity.timers) and checkTimer("reset", entity.timers) == false then
         entity.curAnim = 2
-        addEBullet(entity.x + 6, entity.y + 10, math.pi / 2, 1.0, world)
-        addEBullet(entity.x + 6, entity.y + 10, math.pi/3, 1.0, world)
-        addEBullet(entity.x + 6, entity.y + 10, 2 * math.pi/3, 1.0, world)
+        addEBullet(entity.x + 6, entity.y + 10, math.pi / 2, 0.8, world)
+        addEBullet(entity.x + 6, entity.y + 10, math.pi/3, 0.8, world)
+        addEBullet(entity.x + 6, entity.y + 10, 2 * math.pi/3, 0.8, world)
         deleteTimer("shoot", entity.timers)
         addTimer(0.15, "reset", entity.timers)
       end

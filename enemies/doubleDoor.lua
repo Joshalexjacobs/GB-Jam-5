@@ -19,7 +19,11 @@ local doubleDoor = {
     }
     return animations
   end,
-  filter = nil,
+  filter = function(item, other)
+    if other.type == "player" then
+      return 'slide'
+    end
+  end,
   collision = function(cols, len)
   end,
 }

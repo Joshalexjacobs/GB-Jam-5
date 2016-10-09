@@ -10,6 +10,7 @@ local astroHead = require "enemies/astroHead"
 local mine = require "enemies/mine"
 local mushroomMan = require "enemies/mushroomMan"
 local mushroomChild = require "enemies/mushroomChild"
+local lich = require "enemies/lich"
 
 local enemyDictionary = {
   {name = "moonBug", enemy = moonBug},
@@ -22,6 +23,7 @@ local enemyDictionary = {
   {name = "mine", enemy = mine},
   {name = "mushroomMan", enemy = mushroomMan},
   {name = "mushroomChild", enemy = mushroomChild},
+  {name = "lich", enemy = lich},
 }
 
 function getEnemy(enemy)

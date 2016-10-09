@@ -72,7 +72,9 @@ function game:update(dt)
 
   camPos = top - love.graphics.getHeight() / 2 -- 216 may change as the tilemap changes
   if player.isDead == false then
-    camera:lockY(player.y - 90 + love.graphics.getHeight() / 2) -- - 80 + love...
+    if camPos > 0 then
+      camera:lockY(player.y - 90 + love.graphics.getHeight() / 2) -- - 80 + love...
+    end
   elseif camPos < player.checkPoint - 50 then
     camera:move(0, 2)
   else
