@@ -80,15 +80,23 @@ function updateEnemy(dt, world)
     -- update anim
     newEnemy.animations[newEnemy.curAnim]:update(dt)
 
+    -- if enemy was hit, add and update timer
+    if newEnemy.isHit then
+      if checkTimer("isHit", newEnemy.timers) == false then
+        addTimer(0.05, "isHit", newEnemy.timers)
+      elseif updateTimer(dt, "isHit", newEnemy.timers) then
+        newEnemy.isHit = false
+        deleteTimer("isHit", newEnemy.timers)
+      end
+    end
+
     -- move enemies
     if newEnemy.isDead == false then
       newEnemy.x, newEnemy.y, cols, len = world:move(newEnemy, newEnemy.x + newEnemy.dx, newEnemy.y + newEnemy.dy, newEnemy.filter)
     end
 
     -- handle collision
-    --if newEnemy.type == "enemy" then
-      newEnemy.collision(cols, len)
-    --end
+    newEnemy.collision(cols, len)
 
     -- if enemies fall below screen
     if newEnemy.y + newEnemy.h > camPos + 160 then
@@ -96,6 +104,10 @@ function updateEnemy(dt, world)
     end
 
     if newEnemy.hp <= 0 or newEnemy.isDead then
+      if newEnemy.name == "lich" then
+        gameOver = true
+      end
+
       newEnemy.isDead = true
       if world:hasItem(newEnemy) then removeEnemy(newEnemy, i, world) end
     end
@@ -105,8 +117,7 @@ end
 function drawEnemy()
   for _, newEnemy in ipairs(enemies) do
     if newEnemy.isHit then -- if the enemy was hit, make them flash for a tick
-      love.graphics.setColor(0, 0, 0, 255)
-      newEnemy.isHit = false
+      love.graphics.setColor(150, 150, 150, 255)
     end
 
     --love.graphics.rectangle("fill", newEnemy.x, newEnemy.y, newEnemy.w, newEnemy.h)

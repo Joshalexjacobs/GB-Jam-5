@@ -4,23 +4,39 @@ local pBullet = {
   type = "pBullet",
   x = 0,
   y = 0,
+  offX = 2,
+  offY = 2,
   w = 2,
   h = 2,
   dir = 0,
   speed = 200,
   lifeTime = 0, -- determines how long the bullet is alive for
   isDead = false,
+  playDead = false, -- play death animation
   filter = function(item, other)
     if other.type == "enemy" or other.type == "block" then
       return 'touch'
     end
   end,
-  timers = {}
+  timers = {},
+  animations = nil,
+  spriteSheet = nil,
+  spriteGrid = nil,
+  curAnim = 1,
 }
 
 pBullets = {}
 
 function loadPBullet()
+  -- load images
+  pBullet.spriteSheet = maid64.newImage("img/bulletHit.png")
+  pBullet.spriteGrid = anim8.newGrid(6, 6, 18, 12, 0, 0, 0)
+  pBullet.animations = {
+    anim8.newAnimation(pBullet.spriteGrid(1, 1), 0.1), -- 1 idle
+    anim8.newAnimation(pBullet.spriteGrid("1-3", 1, 1, 2), 0.05, "pauseAtEnd"), -- 2 exploding
+  }
+
+  -- load sfx
   hit = love.audio.newSource("sfx/hit.wav", "static")
   hit:setVolume(0.1)
 end
@@ -43,8 +59,10 @@ end
 
 function updatePBullets(dt, world)
   for i, newPBullet in ipairs(pBullets) do
-    newPBullet.dx = math.cos(newPBullet.dir) * newPBullet.speed * dt
-    newPBullet.dy = math.sin(newPBullet.dir) * newPBullet.speed * dt
+    if newPBullet.isDead == false then
+      newPBullet.dx = math.cos(newPBullet.dir) * newPBullet.speed * dt
+      newPBullet.dy = math.sin(newPBullet.dir) * newPBullet.speed * dt
+    end
 
     local cols, len = 0, 0
 
@@ -60,21 +78,44 @@ function updatePBullets(dt, world)
         cols[j].other.isHit = true
         hit:setPitch(love.math.random(8, 12) * 0.1)
         hit:play()
-        removePBullet(newPBullet, i, world)
+        newPBullet.isDead = true
       elseif cols[j].other.type == "block" then
-        removePBullet(newPBullet, i, world)
+        newPBullet.isDead = true
       end
     end
 
-    if updateTimer(dt, "life", newPBullet.timers) or newPBullet.isDead == true then
+    if updateTimer(dt, "life", newPBullet.timers) then
       newPBullet.isDead = true
       if world:hasItem(newPBullet) then removePBullet(newPBullet, i, world) end
     end
+
+    if newPBullet.isDead == true then
+      if checkTimer("life", newPBullet.timers) then
+        deleteTimer("life", newPBullet.timers)
+      end
+      newPBullet.curAnim = 2
+      newPBullet.type = "dead"
+      newPBullet.dx, newPBullet.dy = 0, 0
+      newPBullet.animations[newPBullet.curAnim]:update(dt)
+
+      if checkTimer("dead", newPBullet.timers) == false then
+        addTimer(0.4, "dead", newPBullet.timers)
+      end
+
+      if updateTimer(dt, "dead", newPBullet.timers) then
+        newPBullet.playDead = true
+      end
+    end
+
+    if newPBullet.playDead == true then
+      if world:hasItem(newPBullet) then removePBullet(newPBullet, i, world) end
+    end
+
   end
 end
 
 function drawPBullets()
   for _, newPBullet in ipairs(pBullets) do
-    love.graphics.rectangle("fill", newPBullet.x, newPBullet.y, newPBullet.w, newPBullet.h)
+    newPBullet.animations[newPBullet.curAnim]:draw(newPBullet.spriteSheet, newPBullet.x, newPBullet.y, 0, 1, 1, newPBullet.offX, newPBullet.offY)
   end
 end

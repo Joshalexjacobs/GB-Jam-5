@@ -36,7 +36,7 @@ function player:load(world)
 
   player.animations = {
     anim8.newAnimation(player.spriteGrid("1-2", 1), 0.5), -- 1 idle
-    anim8.newAnimation(player.spriteGrid("1-3", 2, 2, 2), 0.15), -- 2 walk
+    anim8.newAnimation(player.spriteGrid("1-3", 2, 2, 2), 0.1), -- 2 walk
   }
 
   world:add(player, player.x, player.y, player.w, player.h)
@@ -91,6 +91,16 @@ function player:update(dt, world)
 
     -- update anim
     player.animations[player.curAnim]:update(dt)
+
+    -- if player was hit, add and update timer
+    if player.isHit then
+      if checkTimer("isHit", player.timers) == false then
+        addTimer(0.05, "isHit", player.timers)
+      elseif updateTimer(dt, "isHit", player.timers) then
+        player.isHit = false
+        deleteTimer("isHit", player.timers)
+      end
+    end
 
     if player.isHit == false and checkTimer("hit", player.timers) == false then
       -- 8 way movement
@@ -158,8 +168,7 @@ end
 function player:draw()
   if player.isDead == false then
     if player.isHit then -- if the enemy was hit, make them flash for a tick
-      love.graphics.setColor(0, 0, 0, 255)
-      player.isHit = false
+      love.graphics.setColor(150, 150, 150, 255)
     end
 
     --love.graphics.rectangle("fill", player.x, player.y, player.w, player.h)

@@ -1,6 +1,8 @@
 -- game.lua
 game = {} -- create game gamestate
 
+require "states/win"
+
 player = require "player"
 anim8 = require 'lib/anim8' -- our animation library
 local sti = require "lib/sti" -- simple tiled implementation
@@ -12,6 +14,12 @@ require "enemies"
 require "enemyDictionary"
 require "lib/timer" -- a simple timer library
 require "checkPoint"
+
+-- game win condition
+gameOver = false
+
+-- game timers
+local timers = {}
 
 -- collision using bump
 local world = bump.newWorld()
@@ -63,6 +71,13 @@ function game:keypressed(key, code)
 end
 
 function game:update(dt)
+  if gameOver and checkTimer("win", timers) == false then
+    addTimer(0.5, "win", timers)
+  elseif updateTimer(dt, "win", timers) then
+    Gamestate.switch(win)
+  end
+
+
   if space:isPlaying() == false then
     love.audio.play(space)
   end

@@ -1,7 +1,7 @@
 -- lich.lua -- an enemy
 
 local lich = {
-  hp = 100,
+  hp = 100, -- 100
   w = 48,
   h = 55,
   offX = 8,
