@@ -20,22 +20,19 @@ function copy(obj, seen)
   return res
 end
 
--- global vars
---camPos = 144
---camPos = 730
-camPos = 946
+camPos = 0
 
 function love.load(arg)
-  love.window.setMode(480, 432, {resizable=true, vsync=true, minwidth=160, minheight=144}) -- set the window mode
+  love.window.setMode(480, 432, {resizable=true, vsync=true, minwidth=160, minheight=144, msaa=0}) -- set the window mode
 
   math.randomseed(os.time()) -- seed love.math.rand() using os time
   love.graphics.setDefaultFilter("nearest", "nearest") -- set nearest pixel distance
 
   -- load fonts
-  smallestFont = love.graphics.newFont("lib/Early Gameboy.ttf", 4)
-  smallFont = love.graphics.newFont("lib/Early Gameboy.ttf", 7)
-  medFont = love.graphics.newFont("lib/Early Gameboy.ttf", 10)
-  bigFont = love.graphics.newFont("lib/Early Gameboy.ttf", 14)
+  smallestFont = love.graphics.newFont("lib/EarlyGameBoy.ttf", 4)
+  smallFont = love.graphics.newFont("lib/EarlyGameBoy.ttf", 7)
+  medFont = love.graphics.newFont("lib/EarlyGameBoy.ttf", 10)
+  bigFont = love.graphics.newFont("lib/EarlyGameBoy.ttf", 14)
   love.graphics.setFont(smallFont)
 
   Gamestate.registerEvents()

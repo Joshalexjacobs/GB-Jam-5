@@ -12,7 +12,7 @@ N - Shoot left
 
 M + N - Shoot up
 
-## Libraries Used
+## Libraries Used (Credits)
 - Bump by Enrique García Cota
 - Maid64 by adekto
 - Hump by Matthias Richter
@@ -20,9 +20,6 @@ M + N - Shoot up
 - Anim8 by Enrique García Cota
 - STI (Simple Tiled Implementation) by Landon Manning
 - Timer by Joshua Jacobs
-
-## Other Credits
-- Music by T McB
 
 ## Tools Used
 - Sound Effects created using [BFXR](http://www.bfxr.net/)

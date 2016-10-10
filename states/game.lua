@@ -32,6 +32,9 @@ function game:enter()
   camera = Camera(love.graphics.getWidth() / 2, love.graphics.getHeight() / 2 + player.y - 80)
   camera.smoother = Camera.smooth.upwardDamped(1)
 
+  -- load bg music
+  --space = love.audio.newSource("music/space.wav")
+
   -- update camPos once
   local left, top = camera:position()
   camPos = top - love.graphics.getHeight() / 2 -- 216 may change as the tilemap changes
@@ -60,6 +63,10 @@ function game:keypressed(key, code)
 end
 
 function game:update(dt)
+  if space:isPlaying() == false then
+    love.audio.play(space)
+  end
+
   player:update(dt, world) -- update player
   updatePBullets(dt, world) -- update player bullets
 

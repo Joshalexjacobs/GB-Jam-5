@@ -11,7 +11,8 @@ function controls:enter()
 
 
   -- setup sound and screen
-  splash:setVolume(0.5)
+  select:setVolume(0.2)
+  splash:setVolume(0.2)
   space:setVolume(1)
 end
 

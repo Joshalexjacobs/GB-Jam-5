@@ -22,7 +22,7 @@ pBullets = {}
 
 function loadPBullet()
   hit = love.audio.newSource("sfx/hit.wav", "static")
-  hit:setVolume(0.6)
+  hit:setVolume(0.1)
 end
 
 function addPBullet(pX, pY, pDir, life, world)

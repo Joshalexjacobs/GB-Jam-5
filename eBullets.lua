@@ -25,8 +25,8 @@ function loadEBullet()
   eShoot = love.audio.newSource("sfx/pShoot.wav", "static")
 
   eShoot:setPitch(0.80)
-  eShoot:setVolume(0.5)
-  hit:setVolume(0.6)
+  eShoot:setVolume(0.1)
+  hit:setVolume(0.1)
 end
 
 function addEBullet(pX, pY, pDir, life, world)

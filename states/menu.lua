@@ -12,7 +12,8 @@ function menu:enter()
 
 
   -- setup sound and screen
-  splash:setVolume(0.5)
+  select:setVolume(0.2)
+  splash:setVolume(0.2)
   space:setVolume(1)
   maid64.setup(160,144) -- set maid64 boundaries (160x144 og Gameboy resolution)
 end

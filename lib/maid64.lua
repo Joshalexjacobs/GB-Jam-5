@@ -19,7 +19,7 @@ function maid64.setup(x,y)
 
     maid64.resize(love.graphics.getDimensions()) -- run resize so the sceen is reset corectly
 
-    PaletteSwitcher.init('lib/PaletteSwitcher/palette.png', 'lib/PaletteSwitcher/palette.fs');
+    PaletteSwitcher.init('lib/paletteSwitcher/palette.png', 'lib/paletteSwitcher/palette.fs');
 end
 
 maid64.start = function ()
