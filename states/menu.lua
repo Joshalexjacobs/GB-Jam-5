@@ -45,10 +45,13 @@ function menu:draw()
 
   love.graphics.setColor(0, 0, 0, 255)
   love.graphics.rectangle("fill", 0, 0, 160, 144)
-  love.graphics.setColor(255, 255, 255, 255)
+  love.graphics.setColor(150, 150, 150, 255)
   love.graphics.setFont(bigFont)
+  love.graphics.printf("Lunar Lich", 16, 11, 160)
+  love.graphics.setColor(255, 255, 255, 255)
   love.graphics.printf("Lunar Lich", 15, 10, 160)
   love.graphics.setFont(smallFont)
+
 
   love.graphics.draw(bg, 0, 0, 0, 1, 1, 0, 0)
 
