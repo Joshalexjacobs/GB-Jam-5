@@ -1,4 +1,4 @@
--- Moon Runner by Wee Wisp Games
+-- Lunar Lich by Wee Wisp Games
 -- http://weewispgames.tumblr.com/
 -- main.lua
 
