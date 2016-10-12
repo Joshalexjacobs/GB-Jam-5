@@ -1,3 +1,7 @@
+# Lunar Lich v0.92
+A game by [Wee Wisp](https://negative-josh.itch.io/).
+The latest build of Lunar Lich can be found [here.](https://negative-josh.itch.io/lunar-lich)
+
 # v0.92 Changelog
 - Changed some floor tiles in some sections where it was difficult to see the player/enemy bullets
 - Rearranged some enemy spawn positions
@@ -13,12 +17,9 @@
 - There is now a "Congrats you win!" screen after defeating the final boss
 - Made a small change to the player walk cycle
 
-## Lunar Lich v0.91
-A game by [Wee Wisp](https://negative-josh.itch.io/).
-
-
+## About
 Lunar Lich is a game created using [Love2D](https://love2d.org/) for the [Gameboy Jam 5](https://itch.io/jam/gbjam-5).
-The game is heavily inspired by classic NES games such as Gun Smoke and Super Contra.
+The game is heavily inspired by classic NES games such as Gun Smoke and Super C.
 
 ### Controls
 WASD - Movement
