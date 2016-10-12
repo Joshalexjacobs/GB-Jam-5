@@ -1,3 +1,6 @@
+# v0.92 Changelog
+- Changed some floor tiles in some sections where it was difficult to see the player/enemy bullets
+
 # v0.91 Changelog
 - Added longer enemy/player hit blink
 - Bullets now explode on impact to help show that an object has been hit
