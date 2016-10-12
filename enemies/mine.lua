@@ -37,6 +37,9 @@ local mine = {
       if updateTimer(dt, "die", entity.timers) then
         entity.isDead = true
       end
+
+    elseif entity.isDead then
+      entity.playDead = true
     end
   end,
   spriteSheet = "img/mine.png",

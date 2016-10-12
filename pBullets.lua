@@ -14,7 +14,7 @@ local pBullet = {
   isDead = false,
   playDead = false, -- play death animation
   filter = function(item, other)
-    if other.type == "enemy" or other.type == "block" then
+    if other.type == "enemy" or other.type == "block" or other.type == "crate" then
       return 'touch'
     end
   end,
@@ -32,7 +32,7 @@ function loadPBullet()
   pBullet.spriteSheet = maid64.newImage("img/bulletHit.png")
   pBullet.spriteGrid = anim8.newGrid(6, 6, 18, 12, 0, 0, 0)
   pBullet.animations = {
-    anim8.newAnimation(pBullet.spriteGrid(1, 1), 0.1), -- 1 idle
+    anim8.newAnimation(pBullet.spriteGrid(2, 2, 1, 1), {0.05, 0.1}, "pauseAtEnd"), -- 1 idle
     anim8.newAnimation(pBullet.spriteGrid("1-3", 1, 1, 2), 0.05, "pauseAtEnd"), -- 2 exploding
   }
 
@@ -73,7 +73,7 @@ function updatePBullets(dt, world)
 
     -- handle collision
     for j = 1, len do
-      if cols[j].other.type == "enemy" then
+      if cols[j].other.type == "enemy" or cols[j].other.type == "crate"  then
         cols[j].other.hp = cols[j].other.hp - 1
         cols[j].other.isHit = true
         hit:setPitch(love.math.random(8, 12) * 0.1)
@@ -96,7 +96,6 @@ function updatePBullets(dt, world)
       newPBullet.curAnim = 2
       newPBullet.type = "dead"
       newPBullet.dx, newPBullet.dy = 0, 0
-      newPBullet.animations[newPBullet.curAnim]:update(dt)
 
       if checkTimer("dead", newPBullet.timers) == false then
         addTimer(0.4, "dead", newPBullet.timers)
@@ -110,6 +109,8 @@ function updatePBullets(dt, world)
     if newPBullet.playDead == true then
       if world:hasItem(newPBullet) then removePBullet(newPBullet, i, world) end
     end
+
+    newPBullet.animations[newPBullet.curAnim]:update(dt)
 
   end
 end

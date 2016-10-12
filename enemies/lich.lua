@@ -67,6 +67,13 @@ local lich = {
       if entity.x <= 0 and checkTimer("left", entity.timers) then
         deleteTimer("left", entity.timers)
       end
+
+      if entity.hp <= 0 then
+        entity.isDead = true
+      end
+
+    elseif entity.isDead then
+      entity.playDead = true
     end
   end,
   spriteSheet = "img/lichBIG.png",

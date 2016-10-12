@@ -27,6 +27,13 @@ local moonTurretPlus = {
         entity.curAnim = 1
         deleteTimer("reset", entity.timers)
       end
+
+      if entity.hp <= 0 then
+        entity.isDead = true
+      end
+
+    elseif entity.isDead then
+      entity.playDead = true
     end
   end,
   spriteSheet = "img/moonTurret.png",

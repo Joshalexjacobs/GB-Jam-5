@@ -17,6 +17,7 @@ local enemy = {
   timers = {},
   isHit = false,
   isDead = false,
+  playDead = false,
   isActive = false,
   behaviour = nil,
   spriteSheet = nil,
@@ -24,7 +25,7 @@ local enemy = {
   animations = nil,
   curAnim = 1,
   filter = function(item, other)
-    if other.type == "player" or other.type == "block" then
+    if other.type == "player" or other.type == "block" or other.type == "crate" then
       return 'slide'
     end
   end,
@@ -91,7 +92,7 @@ function updateEnemy(dt, world)
     end
 
     -- move enemies
-    if newEnemy.isDead == false then
+    if newEnemy.playDead == false then
       newEnemy.x, newEnemy.y, cols, len = world:move(newEnemy, newEnemy.x + newEnemy.dx, newEnemy.y + newEnemy.dy, newEnemy.filter)
     end
 
@@ -103,12 +104,11 @@ function updateEnemy(dt, world)
       newEnemy.isActive = nil -- make them inactive
     end
 
-    if newEnemy.hp <= 0 or newEnemy.isDead then
+    if newEnemy.playDead then -- newEnemy.hp <= 0 or
       if newEnemy.name == "lich" then
         gameOver = true
       end
-
-      newEnemy.isDead = true
+      
       if world:hasItem(newEnemy) then removeEnemy(newEnemy, i, world) end
     end
   end

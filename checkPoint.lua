@@ -13,27 +13,27 @@ function loadOutsideMoon(world)
 
   addEnemy(70, 2300, "moonTurret", world)
 
-  addEnemy(150, 2364, "moonCrab", world)
-  addEnemy(125, 2365, "moonCrab", world)
-  addEnemy(100, 2366, "moonCrab", world)
-  addEnemy(75, 2367, "moonCrab", world)
-  addEnemy(50, 2368, "moonCrab", world)
-  addEnemy(25, 2369, "moonCrab", world)
-  addEnemy(0, 2370, "moonCrab", world)
+  addEnemy(80, 2350, "moonCrab", world)
+  addEnemy(80, 2340, "moonCrab", world)
+  addEnemy(50, 2340, "moonCrab", world)
+  addEnemy(50, 2350, "moonCrab", world)
 
-  addEnemy(0, 2432, "centipede", world)
-  addEnemy(30, 2432, "centipede", world)
-  addEnemy(70, 2432, "centipede", world)
-  addEnemy(100, 2432, "centipede", world)
-  addEnemy(130, 2432, "centipede", world)
+  addEnemy(90, 2370, "moonCrab", world)
+  addEnemy(90, 2360, "moonCrab", world)
+  addEnemy(60, 2360, "moonCrab", world)
+  addEnemy(60, 2370, "moonCrab", world)
 
-  addEnemy(0, 2455, "centipede", world)
-  addEnemy(30, 2455, "centipede", world)
-  addEnemy(70, 2455, "centipede", world)
-  addEnemy(100, 2455, "centipede", world)
-  addEnemy(130, 2455, "centipede", world)
+  addEnemy(0, 2440, "centipede", world)
 
-  addEnemy(70, 2480, "centipede", world)
+  addEnemy(30, 2440, "centipede", world)
+  addEnemy(50, 2441, "centipede", world)
+  addEnemy(70, 2440, "centipede", world)
+
+  addEnemy(100, 2440, "centipede", world)
+
+  addEnemy(10, 2480, "centipede", world)
+  addEnemy(30, 2481, "centipede", world)
+  addEnemy(50, 2480, "centipede", world)
 
   addEnemy(125, 2490, "moonBug", world)
   addEnemy(25, 2490, "moonBug", world)
@@ -52,6 +52,7 @@ function loadOutsideMoon(world)
   addEnemy(25, 2565, "moonCrab", world)
 
   addEnemy(70, 2580, "moonCrab", world) -- FIRST ENEMY
+  addEnemy(25, 2650, "crate", world) -- FIRST CRATE
 end
 
 function loadMoonBase(world)

@@ -32,7 +32,7 @@ function loadEBullet()
   eBullet.spriteSheet = maid64.newImage("img/bulletHit.png")
   eBullet.spriteGrid = anim8.newGrid(6, 6, 18, 12, 0, 0, 0)
   eBullet.animations = {
-    anim8.newAnimation(eBullet.spriteGrid(1, 1), 0.1), -- 1 idle
+    anim8.newAnimation(eBullet.spriteGrid(2, 2, 1, 1), {0.05, 0.1}, "pauseAtEnd"), -- 1 idle
     anim8.newAnimation(eBullet.spriteGrid("1-3", 1, 1, 2), 0.05, "pauseAtEnd"), -- 2 exploding
   }
 
@@ -101,7 +101,6 @@ function updateEBullets(dt, world)
       newEBullet.curAnim = 2
       newEBullet.type = "dead"
       newEBullet.dx, newEBullet.dy = 0, 0
-      newEBullet.animations[newEBullet.curAnim]:update(dt)
 
       if checkTimer("dead", newEBullet.timers) == false then
         addTimer(0.4, "dead", newEBullet.timers)
@@ -115,6 +114,8 @@ function updateEBullets(dt, world)
     if newEBullet.playDead == true then
       if world:hasItem(newEBullet) then removePBullet(newEBullet, i, world) end
     end
+
+    newEBullet.animations[newEBullet.curAnim]:update(dt)
 
   end
 end

@@ -54,7 +54,15 @@ local astroHead = {
         entity.animations[3]:gotoFrame(1)
         entity.animations[3]:resume()
       end
+
+      if entity.hp <= 0 then
+        entity.isDead = true
+      end
+
+    elseif entity.isDead then
+      entity.playDead = true
     end
+
   end,
   spriteSheet = "img/astroHead.png",
   spriteGrid = {x = 16, y = 16, w = 48, h = 64},

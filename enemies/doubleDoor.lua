@@ -9,7 +9,13 @@ local doubleDoor = {
   name = "doubleDoor",
   speed = 0,
   behaviour = function(dt, entity, world)
-    -- literally nothing
+    if entity.hp <= 0 then
+      entity.isDead = true
+    end
+
+    if entity.isDead then
+      entity.playDead = true
+    end
   end,
   spriteSheet = "img/doubleDoor.png",
   spriteGrid = {x = 32, y = 32, w = 32, h = 32},

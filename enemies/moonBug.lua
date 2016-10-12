@@ -13,6 +13,13 @@ local moonBug = {
       local angle = math.atan2(entity.y - player.y, entity.x - player.x)
       entity.dx = -math.cos(angle) * dt * entity.speed
       entity.dy = -math.sin(angle) * dt * entity.speed
+
+      if entity.hp <= 0 then
+        entity.isDead = true
+      end
+
+    elseif entity.isDead then
+      entity.playDead = true
     end
   end,
   spriteSheet = "img/moonBug.png",

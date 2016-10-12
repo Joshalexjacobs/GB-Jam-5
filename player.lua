@@ -21,7 +21,7 @@ local player = {
   spriteGrid = nil,
   animations = nil,
   filter = function(item, other)
-    if other.type == "block" or other.name == "doubleDoor" then
+    if other.type == "block" or other.name == "doubleDoor" or other.type == "crate" then
       return 'slide'
     elseif other.type == "mine" then
       return 'cross'
@@ -143,6 +143,7 @@ function player:update(dt, world)
       player.dy = math.min((player.dy + player.decel * dt), 0)
     end
 
+    -- shooting with M/N
     if love.keyboard.isDown("m") and love.keyboard.isDown("n") then
       player:shoot(-math.pi/2, world)
     elseif love.keyboard.isDown("m") then
@@ -178,21 +179,22 @@ end
 
 function player:drawHealth()
   love.graphics.setColor(0, 0, 0, 255)
-  love.graphics.rectangle("fill", 4, 3, 26, 5) -- first background for hp bar
-  love.graphics.rectangle("fill", 4, 0, 8, 4) -- print a background to the text "HP"
+  love.graphics.rectangle("fill", 6, 3, 26, 8) -- first background for hp bar
+  love.graphics.rectangle("fill", 6, 0, 8, 4) -- print a background to the text "HP"
   love.graphics.setColor(255, 255, 255, 255)
   -- in order to print the letters "HP" to the screen without including a new font that's legible
   -- at a very small size, i'm drawing the pixels for each letter individual letter.
   -- not the cleanest method, but it's better than nothing
-  local p = 5 -- p was created to adjust the x position of HP easily
+
+  local p = 7 -- p was created to adjust the x position of HP easily
   love.graphics.points(p, 1, p, 2, p, 3, p+1, 2, p+2, 1, p+2, 2, p+2, 3) -- H
   love.graphics.points(p+4, 1, p+4, 2, p+4, 3, p+5, 1, p+5, 2) -- P
 
-  love.graphics.rectangle("fill", 5, 4, 24, 3) -- print a second background to the health bar
+  love.graphics.rectangle("fill", 7, 4, 24, 6) -- print a second background to the health bar
   love.graphics.setColor(150, 150, 150, 255)
 
   for i = 1, player.hp do -- print a health bar for each hit point the player has
-    love.graphics.rectangle("fill", 6 * i + i, 5, 6, 1)
+    love.graphics.rectangle("fill", 6 * i + i * 2, 5, 6, 4)
   end
 
   love.graphics.setColor(255, 255, 255, 255) -- reset color

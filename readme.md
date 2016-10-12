@@ -1,5 +1,11 @@
 # v0.92 Changelog
 - Changed some floor tiles in some sections where it was difficult to see the player/enemy bullets
+- Rearranged some enemy spawn positions
+- Added muzzle flash to all bullet animations
+- Added Crates that can be destroyed, upgrades will be hidden inside each crate
+- Prepared enemies to have death animations in a future build
+- Removed some palettes that were only displaying 2-3 colors instead of all 4
+- Increased the size of the health bar displayed on screen
 
 # v0.91 Changelog
 - Added longer enemy/player hit blink
