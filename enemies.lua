@@ -38,7 +38,7 @@ local enemy = {
   end
 }
 
-enemies = {}
+local enemies = {}
 
 function addEnemy(eX, eY, n, world)
   local newEnemy = copy(enemy, newEnemy)
@@ -71,8 +71,7 @@ function updateEnemy(dt, world)
 
     -- pre update active check
     if newEnemy.isActive == false and camPos < newEnemy.y + newEnemy.h then
-      print(newEnemy.name .. "is on it")
-        newEnemy.isActive = true -- once the enemy is on screen, activate behaviour function
+      newEnemy.isActive = true -- once the enemy is on screen, activate behaviour function
     elseif newEnemy.isActive then
       -- call enemy update function
       newEnemy.behaviour(dt, newEnemy, world)
@@ -108,7 +107,7 @@ function updateEnemy(dt, world)
       if newEnemy.name == "lich" then
         gameOver = true
       end
-      
+
       if world:hasItem(newEnemy) then removeEnemy(newEnemy, i, world) end
     end
   end
@@ -121,7 +120,10 @@ function drawEnemy()
     end
 
     --love.graphics.rectangle("fill", newEnemy.x, newEnemy.y, newEnemy.w, newEnemy.h)
-    newEnemy.animations[newEnemy.curAnim]:draw(newEnemy.spriteSheet, newEnemy.x, newEnemy.y, 0, 1, 1, newEnemy.offX, newEnemy.offY)
+    if newEnemy.isActive then
+      newEnemy.animations[newEnemy.curAnim]:draw(newEnemy.spriteSheet, newEnemy.x, newEnemy.y, 0, 1, 1, newEnemy.offX, newEnemy.offY)
+    end
+    
     love.graphics.setColor(255, 255, 255, 255)
   end
 end

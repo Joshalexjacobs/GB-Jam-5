@@ -2,6 +2,10 @@
 A game by [Wee Wisp](https://negative-josh.itch.io/).
 The latest build of Lunar Lich can be found [here.](https://negative-josh.itch.io/lunar-lich)
 
+# v0.93 Changelog
+- Enemies are now only drawn if they are on screen, fixed a small frame rate dip after respawning/reaching a new checkpoint
+- Adding upgrades.....
+
 # v0.92 Changelog
 - Changed some floor tiles in some sections where it was difficult to see the player/enemy bullets
 - Rearranged some enemy spawn positions

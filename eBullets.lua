@@ -25,7 +25,7 @@ local eBullet = {
   curAnim = 1,
 }
 
-eBullets = {}
+local eBullets = {}
 
 function loadEBullet()
   -- load images

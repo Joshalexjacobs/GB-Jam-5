@@ -25,7 +25,7 @@ local pBullet = {
   curAnim = 1,
 }
 
-pBullets = {}
+local pBullets = {}
 
 function loadPBullet()
   -- load images

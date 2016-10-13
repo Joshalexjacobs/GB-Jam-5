@@ -12,8 +12,8 @@ local player = {
   dy = 0,
   speed = 40,
   decel = 8,
-  shootRate = 0.15,
-  bulletLife = 0.25, -- how long each bullet is alive in seconds
+  shootRate = 0.16,
+  bulletLife = 0.225, -- how long each bullet is alive in seconds
   isDead = false,
   isHit = false,
   curAnim = 1,
@@ -23,11 +23,12 @@ local player = {
   filter = function(item, other)
     if other.type == "block" or other.name == "doubleDoor" or other.type == "crate" then
       return 'slide'
-    elseif other.type == "mine" then
+    elseif other.type == "mine" or other.type == "upgrade" then
       return 'cross'
     end
   end,
   timers = {},
+  upgrades = {}
 }
 
 function player:load(world)

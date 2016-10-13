@@ -16,9 +16,9 @@ local crate = {
         addTimer(0.7, "dead", entity.timers)
         entity.curAnim = 2
         entity.type = "dead"
+        addUpgrade(entity.x, entity.y, world, "SHOOT DIST.")
       end
     elseif updateTimer(dt, "dead", entity.timers) then
-      -- addUpgrade(...)
       entity.playDead = true
     end
   end,

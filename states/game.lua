@@ -10,6 +10,7 @@ local bump = require "lib/bump" -- our collision library
 
 require "pBullets"
 require "eBullets"
+require "upgrades"
 require "enemies"
 require "enemyDictionary"
 require "lib/timer" -- a simple timer library
@@ -54,6 +55,9 @@ function game:enter()
   loadPBullet()
   loadEBullet()
 
+  -- load upgrades
+  loadUpgrades()
+
   -- load each section of map with enemies/objects
   loadCheckPoint(world)
 end
@@ -90,6 +94,8 @@ function game:update(dt)
   updateEnemy(dt, world) -- update enemies
   updateEBullets(dt, world) -- update enemy bullets
 
+  updateUpgrade(dt, world)
+
   local left, top = camera:position()
 
   camPos = top - love.graphics.getHeight() / 2 -- 216 may change as the tilemap changes
@@ -113,6 +119,8 @@ function game:draw()
   love.graphics.setColor(255, 255, 255, 255)
 
   map:draw()
+
+  drawUpgrade()
 
   drawEnemy()
   drawEBullets()
