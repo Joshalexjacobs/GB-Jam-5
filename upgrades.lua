@@ -35,11 +35,15 @@ local upgrades = {}
 function loadUpgrades()
   -- load images
   upgrade.spriteSheet = maid64.newImage("img/upgrades.png")
-  upgrade.spriteGrid = anim8.newGrid(8, 8, 24, 8, 0, 0, 0)
+  upgrade.spriteGrid = anim8.newGrid(8, 8, 24, 16, 0, 0, 0)
   upgrade.animations = {
     anim8.newAnimation(upgrade.spriteGrid(1, 1), 0.1, "pauseAtEnd"), -- 1 refillHP
     anim8.newAnimation(upgrade.spriteGrid(2, 1), 0.1, "pauseAtEnd"), -- 2 bulletLife
     anim8.newAnimation(upgrade.spriteGrid(3, 1), 0.1, "pauseAtEnd"), -- 3 bulletSpeed
+
+    anim8.newAnimation(upgrade.spriteGrid(1, 2), 0.1, "pauseAtEnd"), -- 4 doubleShot
+    anim8.newAnimation(upgrade.spriteGrid(2, 2), 0.1, "pauseAtEnd"), -- 5 spread
+    anim8.newAnimation(upgrade.spriteGrid(3, 2), 0.1, "pauseAtEnd"), -- 6 machineGun
   }
 
   -- load sfx
@@ -112,7 +116,7 @@ function getUpgradeCol(upg)
     end
 
   -- BULLET LIFE
-elseif(upg.name == "SHOOT DIST.") then
+  elseif(upg.name == "SHOOT DIST.") then
     upg.curAnim = 2
     upg.collision = function(cols, len, entity)
       for j = 1, len do
@@ -123,7 +127,7 @@ elseif(upg.name == "SHOOT DIST.") then
       end
     end
 
-    -- BULLET SPEED
+  -- BULLET SPEED
   elseif(upg.name == "FIRE RATE") then
       upg.curAnim = 3
       upg.collision = function(cols, len, entity)
@@ -135,6 +139,36 @@ elseif(upg.name == "SHOOT DIST.") then
         end
       end
 
+  -- DOUBLE SHOT
+  elseif(upg.name == "DOUBLE SHOT") then
+        upg.curAnim = 4
+        upg.collision = function(cols, len, entity)
+          for j = 1, len do
+            if cols[j].other.type == "player" and entity.isDead == false then
+              cols[j].other.doubleShot = true
+              cols[j].other.spread = false
+              cols[j].other.machineGun = false
+              cols[j].other.noUpgrades = false
+              entity.isDead = true
+            end
+          end
+        end
+
+  -- DOUBLE SHOT
+elseif(upg.name == "SPREAD") then
+        upg.curAnim = 4
+        upg.collision = function(cols, len, entity)
+          for j = 1, len do
+            if cols[j].other.type == "player" and entity.isDead == false then
+              cols[j].other.doubleShot = false
+              cols[j].other.spread = true
+              cols[j].other.machineGun = false
+              cols[j].other.noUpgrades = false
+              entity.isDead = true
+            end
+          end
+        end
+
   end -- end of if/else
 
 end
@@ -142,7 +176,5 @@ end
 
 ---- UPGRADES: ----
 -- TEMPORARY
--- double shot, shoots left and right simultaneously or 2 bullets down the middle
--- spread, shoots 3 bullets in each direction instead of just 1
 -- machine gun, shoots 3 bullets in a burst
 -- shield, 1 free shot doesnt damage player hp (displays a lil shield around char, maybe a bubble?)

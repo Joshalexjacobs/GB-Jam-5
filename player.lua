@@ -28,7 +28,10 @@ local player = {
     end
   end,
   timers = {},
-  upgrades = {}
+  noUpgrades = true,
+  doubleShot = false,
+  spread = false,
+  machineGun = false,
 }
 
 function player:load(world)
@@ -42,17 +45,36 @@ function player:load(world)
 
   world:add(player, player.x, player.y, player.w, player.h)
 
-  --pShoot = love.audio.newSource("sfx/pShoot.wav", "static") -- original shooting sfx
+  -- p shooter sfx
   pShoot = love.audio.newSource("sfx/other.wav", "static") -- new shooting sfx
   pShoot:setVolume(0.1)
+
+  -- double shot sfx
+  dblShot = love.audio.newSource("sfx/doubleShot.wav", "static")
+  dblShot:setVolume(0.5)
 end
 
 function player:shoot(angle, world)
   if checkTimer("shoot", player.timers) == false then
-    addPBullet(player.x + player.w / 2 - 1, player.y, angle, player.bulletLife, world)
-    addTimer(player.shootRate, "shoot", player.timers)
-    pShoot:setPitch(love.math.random(9, 12) * 0.1)
-    pShoot:play()
+    if player.noUpgrades then
+      addPBullet(player.x + player.w / 2 - 1, player.y, angle, player.bulletLife, world)
+      addTimer(player.shootRate, "shoot", player.timers)
+      pShoot:setPitch(love.math.random(9, 12) * 0.1)
+      pShoot:play()
+    elseif player.doubleShot then
+      addPBullet(player.x + player.w / 2 + 3, player.y, angle, player.bulletLife, world)
+      addPBullet(player.x + player.w / 2 - 3, player.y, angle, player.bulletLife, world)
+      addTimer(player.shootRate, "shoot", player.timers)
+      dblShot:setPitch(love.math.random(9, 12) * 0.1) -- doubleShot should have a different sfx
+      dblShot:play()
+    elseif player.spread then
+      addPBullet(player.x + player.w / 2 - 1, player.y, angle, player.bulletLife, world)
+      addPBullet(player.x + player.w / 2 - 1, player.y, angle + 0.2, player.bulletLife, world)
+      addPBullet(player.x + player.w / 2 - 1, player.y, angle - 0.2, player.bulletLife, world)
+      addTimer(player.shootRate, "shoot", player.timers)
+      pShoot:setPitch(love.math.random(9, 12) * 0.1)
+      pShoot:play()
+    end
   end
 end
 
@@ -75,6 +97,13 @@ function player:respawn(world)
   player.hp = 3
   player.isDead = false
   player.type = "player"
+
+  -- reset upgrades
+  player.noUpgrades = true
+  player.doubleShot = false
+  player.spread = false
+  player.machineGun = false
+
   player.x = 75
   player.y = player.checkPoint
   world:move(player, player.x, player.y)
