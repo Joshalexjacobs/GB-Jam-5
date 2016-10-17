@@ -1,7 +1,7 @@
 -- astroHead.lua -- an enemy
 
 local astroHead = {
-  hp = 30,
+  hp = 35,
   w = 14,
   h = 14,
   offX = 1,
@@ -27,22 +27,30 @@ local astroHead = {
       end
 
       if checkTimer("shoot", entity.timers) and updateTimer(dt, "shoot", entity.timers) == true and checkTimer("shot1", entity.timers) == false then
-        addEBullet(entity.x + 6, entity.y + 10, math.pi/3, 0.5, world)
+        --addEBullet(entity.x + 6, entity.y + 10, math.pi/3, 0.5, world)
+        addEBullet(entity.x + 6, entity.y + 10, math.pi/3 - 0.07, 0.75, world)
+        addEBullet(entity.x + 6, entity.y + 10, math.pi/3 + 0.07, 0.75, world)
         addTimer(0.2, "shot1", entity.timers)
       end
 
       if updateTimer(dt, "shot1", entity.timers) and checkTimer("shot2", entity.timers) == false then
-        addEBullet(entity.x + 6, entity.y + 10, math.pi / 2.5, 0.5, world)
+        --addEBullet(entity.x + 6, entity.y + 10, math.pi / 2.5, 0.5, world)
+        addEBullet(entity.x + 6, entity.y + 10, math.pi / 2.5 - 0.07, 0.75, world)
+        addEBullet(entity.x + 6, entity.y + 10, math.pi / 2.5 + 0.07, 0.75, world)
         addTimer(0.2, "shot2", entity.timers)
       end
 
       if updateTimer(dt, "shot2", entity.timers) and checkTimer("shot3", entity.timers) == false then
-        addEBullet(entity.x + 6, entity.y + 10, math.pi / 2, 0.5, world)
+        --addEBullet(entity.x + 6, entity.y + 10, math.pi / 2, 0.5, world)
+        addEBullet(entity.x + 6, entity.y + 10, math.pi / 2 - 0.07, 0.75, world)
+        addEBullet(entity.x + 6, entity.y + 10, math.pi / 2 + 0.07, 0.75, world)
         addTimer(0.2, "shot3", entity.timers)
       end
 
       if updateTimer(dt, "shot3", entity.timers) and checkTimer("shot4", entity.timers) == false then
-        addEBullet(entity.x + 6, entity.y + 10, math.pi / 1.5, 0.5, world)
+        --addEBullet(entity.x + 6, entity.y + 10, math.pi / 1.5, 0.5, world)
+        addEBullet(entity.x + 6, entity.y + 10, math.pi / 1.5 - 0.07, 0.75, world)
+        addEBullet(entity.x + 6, entity.y + 10, math.pi / 1.5 + 0.07, 0.75, world)
         addTimer(0.2, "shot4", entity.timers)
       end
 

@@ -30,6 +30,16 @@ local mushroomMan = {
       end
 
     elseif entity.isDead then
+      addEBullet(entity.x + 6, entity.y + 10, math.pi, 0.15, world) -- left
+      addEBullet(entity.x + 6, entity.y + 10, 2*math.pi, 0.15, world) -- right
+      addEBullet(entity.x + 6, entity.y + 10, 3*math.pi/2, 0.15, world) -- up
+      addEBullet(entity.x + 6, entity.y + 10, math.pi/2, 0.15, world) -- down
+
+      addEBullet(entity.x + 6, entity.y + 10, math.pi/2 - 0.5, 0.15, world) -- downright
+      addEBullet(entity.x + 6, entity.y + 10, math.pi/2 + 0.5, 0.15, world) -- downleft
+
+      addEBullet(entity.x + 6, entity.y + 10, 3*math.pi/2 - 0.5, 0.15, world)
+      addEBullet(entity.x + 6, entity.y + 10, 3*math.pi/2 + 0.5, 0.15, world)
       entity.playDead = true
     end
   end,

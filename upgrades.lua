@@ -71,6 +71,14 @@ function removeUpgrade(entity, i, world)
   table.remove(upgrades, i)
 end
 
+function removeAllUpgrades(world)
+  for i, newUpgrade in ipairs(upgrades) do
+    world:remove(newUpgrade)
+  end
+
+  upgrades = {}
+end
+
 function updateUpgrade(dt, world)
   for i, newUpgrade in ipairs(upgrades) do
     -- float upgrade in place

@@ -5,6 +5,7 @@ The latest build of Lunar Lich can be found [here.](https://negative-josh.itch.i
 # v0.93 Changelog
 - Enemies are now only drawn if they are on screen, fixed a small frame rate dip after respawning/reaching a new checkpoint
 - Added 5 new upgrades: Refill HP, Increased Shoot Distance, Increased Fire Rate, Double Shot, and Spread Shot
+- Crates can now be found throughout the level containing the newly added upgrades
 - Doubled all enemy HP in order help balance the latest upgrades
 
 # v0.92 Changelog

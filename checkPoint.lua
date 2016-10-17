@@ -3,6 +3,9 @@
 local checkPoint = 1
 
 function loadCrates(world)
+  addEnemy(20, 100, "crate", world, "SPREAD")
+  addEnemy(120, 100, "crate", world, "REFILL HP")
+
   addEnemy(120, 925, "crate", world, "DOUBLE SHOT")
 
   addEnemy(30, 1500, "crate", world)
@@ -10,6 +13,8 @@ function loadCrates(world)
   addEnemy(120, 2100, "crate", world)
 
   addEnemy(120, 2300, "crate", world) -- first random crate
+
+  addEnemy(80, 2500, "crate", world, "SHOOT DIST.")
 end
 
 function loadOutsideMoon(world)
@@ -58,7 +63,7 @@ function loadOutsideMoon(world)
 
   addEnemy(70, 2545, "moonCrab", world)
 
-  addEnemy(25, 2550, "crate", world, "DOUBLE SHOT") -- FIRST CRATE
+  addEnemy(25, 2600, "crate", world, "DOUBLE SHOT") -- FIRST CRATE
 
   addEnemy(100, 2565, "moonCrab", world)
   addEnemy(25, 2565, "moonCrab", world)
@@ -100,9 +105,9 @@ function loadMoonBase(world)
   addEnemy(50, 1535, "astroHead", world) -- for draw order
 
   addEnemy(40, 1600, "moonTurret", world)
-  addEnemy(60, 1605, "moonTurret", world)
+  addEnemy(60, 1605, "moonTurretPlus", world)
   addEnemy(80, 1600, "moonTurret", world)
-  addEnemy(100, 1605, "moonTurret", world)
+  addEnemy(100, 1605, "moonTurretPlus", world)
 
   addEnemy(40, 1650, "astroHead", world)
 
