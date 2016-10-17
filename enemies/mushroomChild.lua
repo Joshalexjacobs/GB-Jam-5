@@ -1,7 +1,7 @@
 -- mushroomChild.lua -- an enemy
 
 local mushroomChild = {
-  hp = 1,
+  hp = 2,
   w = 8,
   h = 11,
   offX = 4,

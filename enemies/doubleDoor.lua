@@ -1,7 +1,7 @@
 -- doubleDoor.lua -- an enemy
 
 local doubleDoor = {
-  hp = 10,
+  hp = 20,
   w = 31,
   h = 30,
   offX = 1,

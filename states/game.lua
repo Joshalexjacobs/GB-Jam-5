@@ -60,6 +60,9 @@ function game:enter()
 
   -- load each section of map with enemies/objects
   loadCheckPoint(world)
+
+  -- load all crates (non respawnable)
+  loadCrates(world)
 end
 
 function game:keypressed(key, code)

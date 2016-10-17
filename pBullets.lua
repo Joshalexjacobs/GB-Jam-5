@@ -89,6 +89,10 @@ function updatePBullets(dt, world)
       if world:hasItem(newPBullet) then removePBullet(newPBullet, i, world) end
     end
 
+    if newPBullet.y + newPBullet.h < camPos then
+      newPBullet.isDead = true
+    end
+
     if newPBullet.isDead == true then
       if checkTimer("life", newPBullet.timers) then
         deleteTimer("life", newPBullet.timers)

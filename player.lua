@@ -72,8 +72,8 @@ function player:shoot(angle, world)
       addPBullet(player.x + player.w / 2 - 1, player.y, angle + 0.2, player.bulletLife, world)
       addPBullet(player.x + player.w / 2 - 1, player.y, angle - 0.2, player.bulletLife, world)
       addTimer(player.shootRate, "shoot", player.timers)
-      pShoot:setPitch(love.math.random(9, 12) * 0.1)
-      pShoot:play()
+      dblShot:setPitch(love.math.random(9, 12) * 0.1) -- doubleShot should have a different sfx
+      dblShot:play()
     end
   end
 end
@@ -108,6 +108,7 @@ function player:respawn(world)
   player.y = player.checkPoint
   world:move(player, player.x, player.y)
   loadCheckPoint(world)
+  loadCrates(world)
 end
 
 function player:update(dt, world)

@@ -1,7 +1,7 @@
 -- mooncrab.lua -- an enemy
 
 local moonCrab = {
-  hp = 1,
+  hp = 2,
   w = 14,
   h = 14,
   offX = 1,

@@ -1,7 +1,7 @@
 -- mushroomMan.lua -- an enemy
 
 local mushroomMan = {
-  hp = 5,
+  hp = 10,
   w = 14,
   h = 14,
   offX = 1,

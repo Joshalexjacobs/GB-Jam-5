@@ -16,7 +16,26 @@ local crate = {
         addTimer(0.7, "dead", entity.timers)
         entity.curAnim = 2
         entity.type = "dead"
-        addUpgrade(entity.x, entity.y, world, "SPREAD")
+
+        if entity.extra == nil then
+
+          local selection = love.math.random(0, 100)
+
+          if selection >= 0 and selection <= 5 then
+            addUpgrade(entity.x, entity.y, world, "SPREAD") -- 5%
+          elseif selection >= 6 and selection <= 10 then
+            addUpgrade(entity.x, entity.y, world, "DOUBLE SHOT") -- 5%
+          elseif selection >= 11 and selection <= 40 then
+            addUpgrade(entity.x, entity.y, world, "FIRE RATE") -- 30%
+          elseif selection >= 41 and selection <= 70 then
+            addUpgrade(entity.x, entity.y, world, "SHOOT DIST.") -- 30%
+          else
+            addUpgrade(entity.x, entity.y, world, "REFILL HP") -- 30%
+          end
+        else
+          addUpgrade(entity.x, entity.y, world, entity.extra) -- 30%
+        end
+
       end
     elseif updateTimer(dt, "dead", entity.timers) then
       entity.playDead = true

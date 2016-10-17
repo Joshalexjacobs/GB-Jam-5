@@ -1,7 +1,7 @@
 -- astroHead.lua -- an enemy
 
 local astroHead = {
-  hp = 15,
+  hp = 30,
   w = 14,
   h = 14,
   offX = 1,

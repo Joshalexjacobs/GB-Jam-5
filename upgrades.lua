@@ -156,7 +156,7 @@ function getUpgradeCol(upg)
 
   -- DOUBLE SHOT
 elseif(upg.name == "SPREAD") then
-        upg.curAnim = 4
+        upg.curAnim = 5
         upg.collision = function(cols, len, entity)
           for j = 1, len do
             if cols[j].other.type == "player" and entity.isDead == false then
@@ -172,9 +172,3 @@ elseif(upg.name == "SPREAD") then
   end -- end of if/else
 
 end
-
-
----- UPGRADES: ----
--- TEMPORARY
--- machine gun, shoots 3 bullets in a burst
--- shield, 1 free shot doesnt damage player hp (displays a lil shield around char, maybe a bubble?)

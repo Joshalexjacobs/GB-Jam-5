@@ -1,7 +1,7 @@
 -- centipede.lua -- an enemy
 
 local centipede = {
-  hp = 3,
+  hp = 6,
   w = 14,
   h = 14,
   offX = 1,

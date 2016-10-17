@@ -24,6 +24,7 @@ local enemy = {
   spriteGrid = nil,
   animations = nil,
   curAnim = 1,
+  extra = nil, -- extra datatype for certain enemies
   filter = function(item, other)
     if other.type == "player" or other.type == "block" or other.type == "crate" then
       return 'slide'
@@ -40,8 +41,9 @@ local enemy = {
 
 local enemies = {}
 
-function addEnemy(eX, eY, n, world)
+function addEnemy(eX, eY, n, world, o)
   local newEnemy = copy(enemy, newEnemy)
+  if o ~= nil then newEnemy.extra = o end
   newEnemy.x, newEnemy.y, newEnemy.name = eX, eY, n
 
   -- load enemy specified
@@ -123,7 +125,7 @@ function drawEnemy()
     if newEnemy.isActive then
       newEnemy.animations[newEnemy.curAnim]:draw(newEnemy.spriteSheet, newEnemy.x, newEnemy.y, 0, 1, 1, newEnemy.offX, newEnemy.offY)
     end
-    
+
     love.graphics.setColor(255, 255, 255, 255)
   end
 end

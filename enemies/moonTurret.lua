@@ -1,7 +1,7 @@
 -- moonTurret.lua -- an enemy
 
 local moonTurret = {
-  hp = 5,
+  hp = 10,
   w = 14,
   h = 14,
   offX = 1,
