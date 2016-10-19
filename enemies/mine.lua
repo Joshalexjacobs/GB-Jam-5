@@ -18,6 +18,8 @@ local mine = {
 
       if updateTimer(dt, "blink", entity.timers) and checkTimer("explode", entity.timers) == false then
         addTimer(0.3, "explode", entity.timers)
+        entity.explode:setPitch(love.math.random(7, 14) * 0.1)
+        entity.explode:play()
         entity.curAnim = 3
         entity.type = "enemy"
         entity.collision = function(cols, len)

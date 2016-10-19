@@ -37,12 +37,12 @@ function loadEBullet()
   }
 
   -- load sfx
-  hit = love.audio.newSource("sfx/hit.wav", "static")
+  pHit = love.audio.newSource("sfx/pHit.wav", "static")
   eShoot = love.audio.newSource("sfx/pShoot.wav", "static")
 
   eShoot:setPitch(0.80)
   eShoot:setVolume(0.1)
-  hit:setVolume(0.1)
+  pHit:setVolume(0.1)
 end
 
 function addEBullet(pX, pY, pDir, life, world)
@@ -79,8 +79,8 @@ function updateEBullets(dt, world)
     for j = 1, len do
       if cols[j].other.type == "player" then
         cols[j].other:kill()
-        hit:setPitch(love.math.random(8, 12) * 0.1)
-        hit:play()
+        pHit:setPitch(love.math.random(8, 12) * 0.1)
+        pHit:play()
         newEBullet.isDead = true
         --removeEBullet(newEBullet, i, world)
       elseif cols[j].other.type == "block" then

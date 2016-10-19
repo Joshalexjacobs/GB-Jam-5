@@ -11,9 +11,11 @@ local crate = {
   speed = 20,
   behaviour = function(dt, entity, world)
     if entity.isDead == false then
-      if entity.hp <= 0 then
+      if entity.hp <= 0  and checkTimer("dead", entity.timers) == false then
         entity.isDead = true
         addTimer(0.7, "dead", entity.timers)
+        entity.explode:setPitch(love.math.random(7, 14) * 0.1)
+        entity.explode:play()
         entity.curAnim = 2
         entity.type = "dead"
 
@@ -46,7 +48,7 @@ local crate = {
   animations = function(grid)
     animations = {
       anim8.newAnimation(grid(1, 1), 0.1), -- 1 idle
-      anim8.newAnimation(grid("1-3", "2-3", 1, 2), 0.1, "pauseAtEnd"), -- 2 dead
+      anim8.newAnimation(grid("1-3", "2-3", 2, 2), 0.1, "pauseAtEnd"), -- 2 dead
     }
     return animations
   end,

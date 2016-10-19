@@ -13,15 +13,28 @@ local doubleDoor = {
       entity.isDead = true
     end
 
-    if entity.isDead then
+    if entity.isDead  and checkTimer("dead", entity.timers) == false then
+      addTimer(0.6, "dead", entity.timers)
+      entity.explode:setPitch(love.math.random(7, 14) * 0.1)
+      entity.explode:play()
+      entity.curAnim = 2
+      entity.type = "dead"
+      entity.dx = 0
+      entity.dy = 0
+      entity.filter = function(item, other)
+      end
+    end
+
+    if updateTimer(dt, "dead", entity.timers) then
       entity.playDead = true
     end
   end,
   spriteSheet = "img/doubleDoor.png",
-  spriteGrid = {x = 32, y = 32, w = 32, h = 32},
+  spriteGrid = {x = 32, y = 32, w = 96, h = 96},
   animations = function(grid)
     animations = {
       anim8.newAnimation(grid(1, 1), 0.15), -- 1 static
+      anim8.newAnimation(grid("1-3", "2-3", 2, 1), 0.1), -- 2 dying
     }
     return animations
   end,

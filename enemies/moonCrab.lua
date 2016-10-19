@@ -18,15 +18,28 @@ local moonCrab = {
         entity.isDead = true
       end
 
-    elseif entity.isDead then
+    elseif entity.isDead  and checkTimer("dead", entity.timers) == false then
+      addTimer(0.6, "dead", entity.timers)
+      entity.explode:setPitch(love.math.random(7, 14) * 0.1)
+      entity.explode:play()
+      entity.curAnim = 2
+      entity.type = "dead"
+      entity.dx = 0
+      entity.dy = 0
+      entity.filter = function(item, other)
+      end
+    end
+
+    if updateTimer(dt, "dead", entity.timers) then
       entity.playDead = true
     end
   end,
   spriteSheet = "img/moonCrab.png",
-  spriteGrid = {x = 16, y = 16, w = 48, h = 16},
+  spriteGrid = {x = 16, y = 16, w = 48, h = 64},
   animations = function(grid)
     animations = {
       anim8.newAnimation(grid("1-2", 1, 1, 1, 3, 1), 0.1), -- 1 running
+      anim8.newAnimation(grid("1-3", "2-3", 1, 4), 0.1, "pauseAtEnd"), -- 2 dying
     }
     return animations
   end,
