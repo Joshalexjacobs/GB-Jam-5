@@ -29,9 +29,6 @@ local mushroomMan = {
         entity.isDead = true
       end
 
-<<<<<<< HEAD
-    elseif entity.isDead then
-=======
     elseif entity.isDead and checkTimer("dead", entity.timers) == false then
       -- shoot in 4 directions after death
       addEBullet(entity.x + 6, entity.y + 10, math.pi, 0.15, world) -- left
@@ -51,7 +48,6 @@ local mushroomMan = {
     end
 
     if updateTimer(dt, "dead", entity.timers) then
->>>>>>> 22b61809b01e6c5c891478f7872f61c536fbc257
       entity.playDead = true
     end
   end,
