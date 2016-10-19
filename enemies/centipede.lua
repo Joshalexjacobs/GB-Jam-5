@@ -31,15 +31,28 @@ local centipede = {
         entity.isDead = true
       end
 
-    elseif entity.isDead then
+    elseif entity.isDead and checkTimer("dead", entity.timers) == false then
+      addTimer(0.6, "dead", entity.timers)
+      entity.explode:setPitch(love.math.random(7, 14) * 0.1)
+      entity.explode:play()
+      entity.curAnim = 2
+      entity.type = "dead"
+      entity.dx = 0
+      entity.dy = 0
+      entity.filter = function(item, other)
+      end
+    end
+
+    if updateTimer(dt, "dead", entity.timers) then
       entity.playDead = true
     end
   end,
   spriteSheet = "img/centipede.png",
-  spriteGrid = {x = 16, y = 16, w = 48, h = 32},
+  spriteGrid = {x = 16, y = 16, w = 48, h = 64},
   animations = function(grid)
     animations = {
       anim8.newAnimation(grid("1-3", 1, 1, 2, "3-2", 1), {love.math.random(5, 20) * 0.1, 0.1, 0.1, 0.1, 0.1, 0.1}), -- 1 running
+      anim8.newAnimation(grid("1-3", "3-4", 2, 2), 0.1, "pauseAtEnd"), -- 2 dying
     }
     return animations
   end,

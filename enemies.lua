@@ -24,6 +24,7 @@ local enemy = {
   spriteGrid = nil,
   animations = nil,
   curAnim = 1,
+  explode = nil,
   extra = nil, -- extra datatype for certain enemies
   filter = function(item, other)
     if other.type == "player" or other.type == "block" or other.type == "crate" then
@@ -36,10 +37,16 @@ local enemy = {
         cols[j].other:kill()
       end
     end
-  end
+  end,
 }
 
 local enemies = {}
+
+function loadEnemy()
+  -- enemy death sfx
+  enemy.explode = love.audio.newSource("sfx/explode.wav", "static") -- new shooting sfx
+  enemy.explode:setVolume(0.05)
+end
 
 function addEnemy(eX, eY, n, world, o)
   local newEnemy = copy(enemy, newEnemy)
@@ -98,7 +105,9 @@ function updateEnemy(dt, world)
     end
 
     -- handle collision
-    newEnemy.collision(cols, len)
+    if newEnemy.isDead == false then
+      newEnemy.collision(cols, len)
+    end
 
     -- if enemies fall below screen
     if newEnemy.y + newEnemy.h > camPos + 160 then

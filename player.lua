@@ -45,13 +45,13 @@ function player:load(world)
 
   world:add(player, player.x, player.y, player.w, player.h)
 
-  -- p shooter sfx
+  -- player shoot sfx
   pShoot = love.audio.newSource("sfx/other.wav", "static") -- new shooting sfx
   pShoot:setVolume(0.1)
 
-  -- double shot sfx
-  dblShot = love.audio.newSource("sfx/doubleShot.wav", "static")
-  dblShot:setVolume(0.5)
+  -- player hit sfx
+  pHit = love.audio.newSource("sfx/pHit.wav", "static")
+  pHit:setVolume(0.1)
 end
 
 function player:shoot(angle, world)
@@ -65,15 +65,15 @@ function player:shoot(angle, world)
       addPBullet(player.x + player.w / 2 + 3, player.y, angle, player.bulletLife, world)
       addPBullet(player.x + player.w / 2 - 3, player.y, angle, player.bulletLife, world)
       addTimer(player.shootRate, "shoot", player.timers)
-      dblShot:setPitch(love.math.random(9, 12) * 0.1) -- doubleShot should have a different sfx
-      dblShot:play()
+      pShoot:setPitch(love.math.random(6, 8) * 0.1) -- doubleShot should have a different sfx
+      pShoot:play()
     elseif player.spread then
       addPBullet(player.x + player.w / 2 - 1, player.y, angle, player.bulletLife, world)
       addPBullet(player.x + player.w / 2 - 1, player.y, angle + 0.2, player.bulletLife, world)
       addPBullet(player.x + player.w / 2 - 1, player.y, angle - 0.2, player.bulletLife, world)
       addTimer(player.shootRate, "shoot", player.timers)
-      dblShot:setPitch(love.math.random(9, 12) * 0.1) -- doubleShot should have a different sfx
-      dblShot:play()
+      pShoot:setPitch(love.math.random(14, 16) * 0.1) -- doubleShot should have a different sfx
+      pShoot:play()
     end
   end
 end
@@ -82,6 +82,10 @@ function player:kill()
   if checkTimer("invincible", player.timers) == false then
     player.hp = player.hp - 1
     player.dy = 2.5
+
+    pHit:setPitch(love.math.random(8, 12) * 0.1)
+    pHit:play()
+
     addTimer(1.0, "invincible", player.timers)
     addTimer(0.4, "hit", player.timers)
     player.isHit = true

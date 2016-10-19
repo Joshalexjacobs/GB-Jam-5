@@ -72,7 +72,7 @@ local lich = {
         entity.isDead = true
       end
 
-    elseif entity.isDead then
+    elseif entity.isDead  and checkTimer("dead", entity.timers) == false then
       entity.playDead = true
     end
   end,

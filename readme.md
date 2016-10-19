@@ -1,6 +1,11 @@
-# Lunar Lich v0.92
+# Lunar Lich v0.94
 A game by [Wee Wisp](https://negative-josh.itch.io/).
 The latest build of Lunar Lich can be found [here.](https://negative-josh.itch.io/lunar-lich)
+
+# v0.94 Changelog
+- Added basic death animations and sound effects for each enemy
+- Added a new player hit sound effect
+- Removed old spread and double shot sound effect
 
 # v0.93 Changelog
 - Enemies are now only drawn if they are on screen, fixed a small frame rate dip after respawning/reaching a new checkpoint

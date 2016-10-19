@@ -29,17 +29,30 @@ local mushroomChild = {
         entity.isDead = true
       end
 
-    elseif entity.isDead then
+    elseif entity.isDead  and checkTimer("dead", entity.timers) == false then
+      addTimer(0.6, "dead", entity.timers)
+      entity.explode:setPitch(love.math.random(7, 14) * 0.1)
+      entity.explode:play()
+      entity.curAnim = 4
+      entity.type = "dead"
+      entity.dx = 0
+      entity.dy = 0
+      entity.filter = function(item, other)
+      end
+    end
+
+    if updateTimer(dt, "dead", entity.timers) then
       entity.playDead = true
     end
   end,
   spriteSheet = "img/mushroomChild.png",
-  spriteGrid = {x = 16, y = 16, w = 48, h = 32},
+  spriteGrid = {x = 16, y = 16, w = 48, h = 80},
   animations = function(grid)
     animations = {
       anim8.newAnimation(grid(1, 1), 0.15), -- 1 mush
       anim8.newAnimation(grid("2-3", 1), 0.15, "pauseAtEnd"), -- 2 stand
-      anim8.newAnimation(grid("1-3", 2), 0.15), -- 1 chase
+      anim8.newAnimation(grid("1-3", 2), 0.15), -- 3 chase
+      anim8.newAnimation(grid("1-3", "3-4", 1, 5), 0.1, "pauseAtEnd"), -- 4 dying
     }
     return animations
   end,

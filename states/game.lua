@@ -51,6 +51,9 @@ function game:enter()
   -- intialize player
   player:load(world)
 
+  -- load enemy
+  loadEnemy()
+
   -- load player and enemy bullet assets
   loadPBullet()
   loadEBullet()

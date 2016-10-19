@@ -7,7 +7,7 @@ local astroHead = {
   offX = 1,
   offY = 1,
   name = "astroHead",
-  speed = 10,
+  speed = 12,
   behaviour = function(dt, entity, world)
     if entity.isDead == false then
       if checkTimer("follow", entity.timers) == false then
@@ -67,18 +67,31 @@ local astroHead = {
         entity.isDead = true
       end
 
-    elseif entity.isDead then
+    elseif entity.isDead and checkTimer("dead", entity.timers) == false then
+      addTimer(0.6, "dead", entity.timers)
+      entity.explode:setPitch(love.math.random(7, 14) * 0.1)
+      entity.explode:play()
+      entity.curAnim = 4
+      entity.type = "dead"
+      entity.dx = 0
+      entity.dy = 0
+      entity.filter = function(item, other)
+      end
+    end
+
+    if updateTimer(dt, "dead", entity.timers) then
       entity.playDead = true
     end
 
   end,
   spriteSheet = "img/astroHead.png",
-  spriteGrid = {x = 16, y = 16, w = 48, h = 64},
+  spriteGrid = {x = 16, y = 16, w = 48, h = 96},
   animations = function(grid)
     animations = {
       anim8.newAnimation(grid("1-2", 1), {love.math.random(5, 20) * 0.1, 0.1}), -- 1 floating
       anim8.newAnimation(grid("1-3", "2-3", 1, 4), 0.1, "pauseAtEnd"), -- 2 shooting
       anim8.newAnimation(grid("3-1", "3-2", 1, 1), 0.1, "pauseAtEnd"), -- 3 reset
+      anim8.newAnimation(grid("1-3", "5-6", 3, 1), 0.1, "pauseAtEnd"), -- 4 dying
     }
     return animations
   end,

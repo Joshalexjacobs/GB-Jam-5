@@ -32,16 +32,29 @@ local moonTurretPlus = {
         entity.isDead = true
       end
 
-    elseif entity.isDead then
+    elseif entity.isDead  and checkTimer("dead", entity.timers) == false then
+      addTimer(0.6, "dead", entity.timers)
+      entity.explode:setPitch(love.math.random(7, 14) * 0.1)
+      entity.explode:play()
+      entity.curAnim = 3
+      entity.type = "dead"
+      entity.dx = 0
+      entity.dy = 0
+      entity.filter = function(item, other)
+      end
+    end
+
+    if updateTimer(dt, "dead", entity.timers) then
       entity.playDead = true
     end
   end,
   spriteSheet = "img/moonTurret.png",
-  spriteGrid = {x = 16, y = 16, w = 48, h = 16},
+  spriteGrid = {x = 16, y = 16, w = 48, h = 48},
   animations = function(grid)
     animations = {
       anim8.newAnimation(grid(1, 1), 0.25), -- 1 idle
       anim8.newAnimation(grid(2, 1), 0.25), -- 2 shot
+      anim8.newAnimation(grid("1-3", "2-3", 3, 1), 0.1, "pauseAtEnd"), -- 3 shot
     }
     return animations
   end,
