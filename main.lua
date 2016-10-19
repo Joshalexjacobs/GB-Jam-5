@@ -25,6 +25,9 @@ camPos = 0
 function love.load(arg)
   love.window.setMode(480, 432, {resizable=true, vsync=true, minwidth=160, minheight=144, msaa=0}) -- set the window mode
 
+  imageData = love.image.newImageData("img/icon2.png")
+  love.window.setIcon(imageData)
+
   math.randomseed(os.time()) -- seed love.math.rand() using os time
   love.graphics.setDefaultFilter("nearest", "nearest") -- set nearest pixel distance
 
