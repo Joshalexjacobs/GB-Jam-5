@@ -1,6 +1,10 @@
-# Lunar Lich v0.94
+# Lunar Lich v0.95
 A game by [Wee Wisp](https://negative-josh.itch.io/).
 The latest build of Lunar Lich can be found [here.](https://negative-josh.itch.io/lunar-lich)
+
+# v0.95 Changelog
+- Added boundaries so the player can no longer wander off screen
+- Fixed a bug that allowed the player to skip the interior section of the game by detonating a mine
 
 # v0.94 Changelog
 - Added basic death animations and sound effects for each enemy
