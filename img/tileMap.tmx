@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="10" height="171" tilewidth="16" tileheight="16" nextobjectid="102">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="10" height="171" tilewidth="16" tileheight="16" nextobjectid="112">
  <tileset firstgid="1" name="spritePack" tilewidth="16" tileheight="16" tilecount="16" columns="8">
   <image source="spritePack.png" width="128" height="32"/>
  </tileset>
@@ -233,6 +233,21 @@
     <property name="collidable" type="bool" value="true"/>
    </properties>
   </object>
+  <object id="10" name="filler" type="block" x="0" y="0" width="0" height="0">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="11" name="filler" type="block" x="0" y="0" width="0" height="0">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="12" name="filler" type="block" x="0" y="0" width="0" height="0">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+   </properties>
+  </object>
   <object id="13" name="big shroom" type="block" x="17.5" y="2210.39" width="10" height="11">
    <properties>
     <property name="collidable" type="bool" value="true"/>
@@ -269,6 +284,11 @@
    </properties>
   </object>
   <object id="20" name="big rock" type="block" x="112.388" y="2336.83" width="30.2691" height="13.7332">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="21" name="filler" type="block" x="0" y="0" width="0" height="0">
    <properties>
     <property name="collidable" type="bool" value="true"/>
    </properties>
@@ -333,6 +353,11 @@
     <property name="collidable" type="bool" value="true"/>
    </properties>
   </object>
+  <object id="34" name="filler" type="block" x="0" y="0" width="0" height="0">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+   </properties>
+  </object>
   <object id="35" name="wall6" type="block" x="112.528" y="2050.81" width="14.8824" height="26.7657">
    <properties>
     <property name="collidable" type="bool" value="true"/>
@@ -354,6 +379,11 @@
    </properties>
   </object>
   <object id="39" name="wall8" type="block" x="95.9922" y="1936.03" width="65.0195" height="31.3191">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="40" name="filler" type="block" x="0" y="0" width="0" height="0">
    <properties>
     <property name="collidable" type="bool" value="true"/>
    </properties>
@@ -393,6 +423,11 @@
     <property name="collidable" type="bool" value="true"/>
    </properties>
   </object>
+  <object id="48" name="filler" type="block" x="0" y="0" width="0" height="0">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+   </properties>
+  </object>
   <object id="49" name="wall9" type="block" x="127.676" y="1665.05" width="16.1677" height="31.3191">
    <properties>
     <property name="collidable" type="bool" value="true"/>
@@ -408,7 +443,7 @@
     <property name="collidable" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="52" name="wall9" type="block" x="14.9136" y="1328.37" width="65.0195" height="159.686">
+  <object id="52" name="weird wall" type="block" x="-28.8317" y="1328.37" width="108.765" height="159.686">
    <properties>
     <property name="collidable" type="bool" value="true"/>
    </properties>
@@ -654,6 +689,51 @@
    </properties>
   </object>
   <object id="101" name="wall9" type="block" x="-1.25506" y="-1.77917" width="162.048" height="34.2038">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="102" name="wallx1" type="block" x="-26.8317" y="2279.5" width="24" height="490">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="103" name="wallx2" type="block" x="162.668" y="2278.5" width="22.5" height="486.5">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="104" name="wallx3" type="block" x="-20.3317" y="2737.5" width="204" height="37">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="105" name="wallx4" type="block" x="161.168" y="1748.5" width="28.5" height="224.5">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="106" name="wallx5" type="block" x="-35.3317" y="1748.5" width="33" height="224.5">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="107" name="wallx6" type="block" x="-27.3317" y="875" width="24" height="376.5">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="108" name="wallx7" type="block" x="162.168" y="875" width="25" height="473">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="109" name="wallx8" type="block" x="163.668" y="79.5" width="23.5" height="457.5">
+   <properties>
+    <property name="collidable" type="bool" value="true"/>
+   </properties>
+  </object>
+  <object id="110" name="wallx9" type="block" x="-27.3317" y="79.5" width="24" height="457.5">
    <properties>
     <property name="collidable" type="bool" value="true"/>
    </properties>

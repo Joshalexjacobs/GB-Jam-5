@@ -8,7 +8,7 @@ return {
   height = 171,
   tilewidth = 16,
   tileheight = 16,
-  nextobjectid = 102,
+  nextobjectid = 112,
   properties = {},
   tilesets = {
     {
@@ -421,6 +421,51 @@ return {
           }
         },
         {
+          id = 10,
+          name = "filler",
+          type = "block",
+          shape = "rectangle",
+          x = 0,
+          y = 0,
+          width = 1,
+          height = 1,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 11,
+          name = "filler",
+          type = "block",
+          shape = "rectangle",
+          x = 0,
+          y = 0,
+          width = 1,
+          height = 1,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 12,
+          name = "filler",
+          type = "block",
+          shape = "rectangle",
+          x = 0,
+          y = 0,
+          width = 1,
+          height = 1,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
           id = 13,
           name = "big shroom",
           type = "block",
@@ -534,6 +579,21 @@ return {
           y = 2336.83,
           width = 30.2691,
           height = 13.7332,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 21,
+          name = "filler",
+          type = "block",
+          shape = "rectangle",
+          x = 0,
+          y = 0,
+          width = 1,
+          height = 1,
           rotation = 0,
           visible = true,
           properties = {
@@ -721,6 +781,21 @@ return {
           }
         },
         {
+          id = 34,
+          name = "filler",
+          type = "block",
+          shape = "rectangle",
+          x = 0,
+          y = 0,
+          width = 1,
+          height = 1,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
           id = 35,
           name = "wall6",
           type = "block",
@@ -789,6 +864,21 @@ return {
           y = 1936.03,
           width = 65.0195,
           height = 31.3191,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 40,
+          name = "filler",
+          type = "block",
+          shape = "rectangle",
+          x = 0,
+          y = 0,
+          width = 1,
+          height = 1,
           rotation = 0,
           visible = true,
           properties = {
@@ -901,6 +991,21 @@ return {
           }
         },
         {
+          id = 48,
+          name = "filler",
+          type = "block",
+          shape = "rectangle",
+          x = 0,
+          y = 0,
+          width = 1,
+          height = 1,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
           id = 49,
           name = "wall9",
           type = "block",
@@ -947,12 +1052,12 @@ return {
         },
         {
           id = 52,
-          name = "wall9",
+          name = "weird wall",
           type = "block",
           shape = "rectangle",
-          x = 14.9136,
+          x = -28.8317,
           y = 1328.37,
-          width = 65.0195,
+          width = 108.765,
           height = 159.686,
           rotation = 0,
           visible = true,
@@ -1689,6 +1794,141 @@ return {
           y = -1.77917,
           width = 162.048,
           height = 34.2038,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 102,
+          name = "wallx1",
+          type = "block",
+          shape = "rectangle",
+          x = -26.8317,
+          y = 2279.5,
+          width = 24,
+          height = 490,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 103,
+          name = "wallx2",
+          type = "block",
+          shape = "rectangle",
+          x = 162.668,
+          y = 2278.5,
+          width = 22.5,
+          height = 486.5,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 104,
+          name = "wallx3",
+          type = "block",
+          shape = "rectangle",
+          x = -20.3317,
+          y = 2737.5,
+          width = 204,
+          height = 37,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 105,
+          name = "wallx4",
+          type = "block",
+          shape = "rectangle",
+          x = 161.168,
+          y = 1748.5,
+          width = 28.5,
+          height = 224.5,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 106,
+          name = "wallx5",
+          type = "block",
+          shape = "rectangle",
+          x = -35.3317,
+          y = 1748.5,
+          width = 33,
+          height = 224.5,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 107,
+          name = "wallx6",
+          type = "block",
+          shape = "rectangle",
+          x = -27.3317,
+          y = 875,
+          width = 24,
+          height = 376.5,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 108,
+          name = "wallx7",
+          type = "block",
+          shape = "rectangle",
+          x = 162.168,
+          y = 875,
+          width = 25,
+          height = 473,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 109,
+          name = "wallx8",
+          type = "block",
+          shape = "rectangle",
+          x = 163.668,
+          y = 79.5,
+          width = 23.5,
+          height = 457.5,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["collidable"] = true
+          }
+        },
+        {
+          id = 110,
+          name = "wallx9",
+          type = "block",
+          shape = "rectangle",
+          x = -27.3317,
+          y = 79.5,
+          width = 24,
+          height = 457.5,
           rotation = 0,
           visible = true,
           properties = {
